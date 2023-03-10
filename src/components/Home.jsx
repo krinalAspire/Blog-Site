@@ -13,6 +13,7 @@ function Home(){
          <div className="text-white header">
           <Link to={'/home'}>Home</Link>
           <Link to={'/login'} style={{float: 'right'}}>Logout</Link>
+          <div>hello</div>
       </div>
     );
 }
