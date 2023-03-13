@@ -1,6 +1,8 @@
 import React from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes} from "react-router-dom";
 import Blogpage from "./First Page/Blogpage";
+import Login from "./First Page/Login";
+import Register from "./First Page/Register";
 
 function Header() {
     return (
