@@ -63,7 +63,7 @@ function Blogcreate() {
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>ID</label>
-                                        <input value={id} disabled='disabled' className="form-control" />
+                                        <input value={id} disabled='disabled' className="form-control" placeholder="disabled" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">

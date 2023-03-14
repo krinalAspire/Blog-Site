@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Blogview(){
-    const {blogid}=useParams();
+function User(){
+    const {userid}=useParams();
     
-    const[blogdata, BlogDatachange]=useState({});
+    const[userdata, UserDatachange]=useState({});
 
     useEffect(()=>{
-        fetch("http://localhost:5000/blogs/"+blogid,{
+        fetch("http://localhost:5000/users/"+userid,{
           method:'GET'}).then(result=>result.json())
-          .then(result=>BlogDatachange(result)) 
+          .then(result=>UserDatachange(result)) 
         // }).then((resp)=>{
         //   console.log(resp)
         //   // toast.success('Success'); 
@@ -19,6 +19,7 @@ function Blogview(){
           toast.error("Failed : " + err.message);
         })
     },[]);
+
     return(
         <>
         <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
@@ -30,7 +31,7 @@ function Blogview(){
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link text-white" aria-current="page" to={'/home'}>Blog List</NavLink>
+                <NavLink className="nav-link text-white" to="/userlist">User List</NavLink>
               </li>
               <li>
                 <NavLink className="nav-link text-white" to={'/login'} style={{ float: 'right' }}>Logout</NavLink>
@@ -40,24 +41,28 @@ function Blogview(){
         </div>
       </nav>
 
-      <div className="container">
-           <div>
-              <div>
-                <h1 className="text-white">Blog Details</h1>
+
+      <div>
+           <div className="card" style={{textAlign:"center"}}>
+              <div className="card-title">
+                <h1>User Details</h1>
               </div>
-              <hr className="style"/>
+              <hr/>
+              <div className="card-body"></div>
            
-        { blogdata &&
-        <div className="text-white"> 
-        <h2>Title : <b>{blogdata.title}</b></h2>
-        <h3 className="pt-2">Description</h3>
-        <h5>Description : {blogdata.description}</h5>
+        { userdata &&
+        <div>
+        <h2>User Name Is : <b>{userdata.name}</b></h2>
+        <h3 className="pt-2">Contact Details</h3>
+        <h5>Email is : {userdata.email}</h5>
+        <h5>Phone is : {userdata.phone}</h5>
         <h3 className="pt-2">Other Details</h3>
-        <h5>Author : {blogdata.author}</h5>
-        <h5>Category : {blogdata.category}</h5>
+        <h5>Country is : {userdata.country}</h5>
+        <h5>Address is : {userdata.address}</h5>
+        <h5>Gender is : {userdata.gender}</h5>
 
         <br/>
-        <Link to={'/userlist'} className="btn btn-dark">Back To BlogList</Link>
+        <Link to={'/userlist'} className="btn btn-primary">Back To UserList</Link>
         </div>
         }
         </div>
@@ -67,4 +72,4 @@ function Blogview(){
     );
 }
 
-export default Blogview;
+export default User;

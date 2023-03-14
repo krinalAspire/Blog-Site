@@ -30,6 +30,11 @@ function Login() {
            } else{
              toast.error('please Enter valid password');
            }
+           if(resp.role==='admin'){
+              usenavigate('/home')
+           }else{
+              usenavigate('/user')
+           }
          }
       }).catch((err)=>{
        toast.error('Login Failed due to'+err.message);
@@ -63,6 +68,9 @@ function Login() {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link text-white" to="/about">About</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                 <NavLink to="/register" className="nav-link text-white" ><span className="fa fa-user-plus me-2"></span>Register</NavLink>
                             </li>
                         </ul>
                     </div>

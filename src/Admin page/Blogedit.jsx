@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import {Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Blogedit(){
-    const {blogid}= useParams();
+function Blogedit() {
+    const { blogid } = useParams();
 
-    useEffect(()=>{
-        fetch("http://localhost:5000/blogs/" +blogid).then((res)=>{
+    const [Blogdata, blogdatachange] = useState({});
+
+    useEffect(() => {
+        fetch("http://localhost:5000/blogs/" + blogid).then((res) => {
             return res.json();
-        }).then((resp)=>{
-            
-        }).catch((err)=>{
-            toast.error("Failed :"  +err.message);
+        }).then((resp) => {
+            idchange(resp.id);
+            titlechange(resp.title);
+            descriptionchange(resp.description);
+            authorchange(resp.author);
+            categorychange(resp.category);
+        }).catch((err) => {
+            toast.error("Failed :" + err.message);
         })
-    },[]);
+    }, []);
 
     const [id, idchange] = useState("");
     const [title, titlechange] = useState("");
@@ -21,27 +27,27 @@ function Blogedit(){
     const [author, authorchange] = useState("");
     const [category, categorychange] = useState("cs-it");
 
-    const navigate=useNavigate(); 
+    const navigate = useNavigate();
 
-    const handlesubmit=(e)=>{
+    const handlesubmit = (e) => {
         e.preventDefault();
-        const bdata={id,title,description,author,category};
-       
-        fetch("http://localhost:5000/blogs",{
-            method:'POST',
-            headers:{"content-type":"application/json"},
-            body:JSON.stringify(bdata)
-        }).then((res)=>{
+        const bdata = { id, title, description, author, category };
+
+        fetch("http://localhost:5000/blogs/"+blogid, {
+            method: 'PUT',
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(bdata)
+        }).then((res) => {
             toast.success('Saved successfully');
             navigate('/home');
-        }).catch((err)=>{
-            toast.error("Failed:" +err.message);
+        }).catch((err) => {
+            toast.error("Failed:" + err.message);
         })
     }
 
-    return(
-       <>
-       <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
+    return (
+        <>
+            <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
                 <div className="container-fluid py-2">
                     <div className="navbar-brand text-white" to="/">Blog</div>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,12 +69,12 @@ function Blogedit(){
                 </div>
             </nav>
 
-            
+
             <div className="row">
                 <div className="offset-lg-3 col-lg-6">
                     <form className="container text-white" onSubmit={handlesubmit}>
                         <div>
-                            <h2>Blog Create</h2>
+                            <h2>Blog Edit</h2>
                         </div>
                         <div>
                             <div className="row">
@@ -87,7 +93,7 @@ function Blogedit(){
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>Description</label>
-                                        <textarea value={description} onChange={e=>descriptionchange(e.target.value)} className="form-control"></textarea>
+                                        <textarea value={description} onChange={e => descriptionchange(e.target.value)} className="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
@@ -118,7 +124,7 @@ function Blogedit(){
                 </div>
             </div>
 
-       </>
+        </>
     );
 }
 
