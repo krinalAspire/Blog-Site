@@ -27,7 +27,7 @@ function Blogpage() {
                 <div className="container">
                     <div>
                         <div className="text-center my-5" >
-                            <h2 className="text-white">All Blogs</h2>
+                            <h1 className="text-white">Today's Blogs</h1>
                             <hr className="style"/>
                         </div>
                         { blogData &&

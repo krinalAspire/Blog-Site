@@ -67,7 +67,7 @@ function Register() {
 
     return (
         <>
-        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
+        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>
                 <div className="container-fluid py-2">
                     <NavLink className="navbar-brand text-white" to="/">Blog</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@ function Register() {
                 </div>
             </nav>
             <div>
-                <div className="offset-lg-3 col-lg-6">
+                <div className="register offset-lg-3 col-lg-6">
                     <form className="container" onSubmit={handleSubmit}>
                         <div className="card">
                             <div className="card-header">

@@ -25,7 +25,7 @@ function UserDetail(){
     },[]);
     return(
         <>
-        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
+        <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>
                 <div className="container-fluid py-2">
                     <div className="navbar-brand text-white" to="/">Blog</div>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,13 +37,15 @@ function UserDetail(){
                                 <NavLink className="nav-link text-white" aria-current="page" to={'/user'}>Home</NavLink>
                             </li> */}
                             <li className="nav-item">
-                                <NavLink className="nav-link text-white" to="/about">About</NavLink>
+                                <NavLink className="nav-link text-white" to="/Aboutuser">About</NavLink>
                             </li>
-                            <li>
+                            {/* <li>
                               <NavLink className="nav-link text-white" to={'/login'} style={{float: 'right'}}>Logout</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
+                    <span className="navbar-brand nav-link text-white fw-bold">Welcome User</span>
+          <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
                 </div>
             </nav>
 

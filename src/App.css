@@ -1,3 +1,10 @@
+/* .App{
+    background-image: linear-gradient(to bottom right, #0652C5,#D4418E);
+    height: 600px;
+    background-size:contain;
+    margin: 0%;
+    padding: 0%;
+} */
 
 
 a{
@@ -19,3 +26,36 @@ hr.style{
     transform: scale(1.1);
     box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
   }
+
+img{
+    float: right;
+    width:450px;
+    height:350px;
+    margin-left:15px;
+}
+
+.about{
+    margin-top: 45px;
+    padding-top: 70px
+}
+
+.blogcreate{
+    margin-top: 70px;
+    padding-bottom: 35px;
+}
+.blogedit{
+    margin-top: 70px;
+    padding-bottom: 35px;
+}
+.login{
+    padding-top: 20px;
+    margin-bottom: 55px;
+}
+
+.register{
+    margin-top: 40px;
+    padding-bottom: 30px;
+}
+.userlist{
+    margin-top: 40px;
+}

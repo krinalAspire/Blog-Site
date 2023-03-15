@@ -7,7 +7,7 @@ import Register from "./First Page/Register";
 function Header() {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(93, 63, 211)' }}>
+            <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>
                 <div className="container-fluid py-2">
                     <NavLink className="navbar-brand text-white" to="/">Blog</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,17 +21,16 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link text-white" to="/about">About</NavLink>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                  <NavLink to="/login" className="nav-link text-white"><span className="fa fa-sign-in me-2"></span>Login</NavLink>
                             </li>
                             <li className="nav-item">
                                  <NavLink to="/register" className="nav-link text-white" ><span className="fa fa-user-plus me-2"></span>Register</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
-                        
-                        {/* <NavLink className="navbar-brand nav-link text-white mx-auto" to="/login"><span className="fa fa-sign-in me-2"></span>Login</NavLink> */}
-                        
                     </div>
+                    <NavLink to="/login" className="navbar-brand mx-auto nav-link text-white btn btn-outline-success p-1"><span className="fa fa-sign-in me-2"></span>Login</NavLink>
+                    <NavLink to="/register" className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-user-plus me-2"></span>Register</NavLink>
                 </div>
             </nav>
 
