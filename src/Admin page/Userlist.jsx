@@ -59,7 +59,7 @@ function Userlist(){
             <div>
               
               <table className="table table-bordered text-white">
-                <thead className="text-white">
+                <thead className="text-dark table-secondary">
                   <tr>
                     <td>Name</td>
                     <td>Email</td>
@@ -81,7 +81,7 @@ function Userlist(){
                         <td>{item.address}</td>
                         <td>{item.gender}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item.id) }} className="ms-2 ps-4 text-dark" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadDetail(item.id) }} className="ms-2 ps-4 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
                            </td>
                       </tr>
                     ))

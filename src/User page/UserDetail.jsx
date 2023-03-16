@@ -78,7 +78,7 @@ function UserDetail(){
                         <td>{item.author}</td>
                         <td>{item.category}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item.id) }} className=" ps-3 text-dark" data-toggle="tooltip" data-placement="bottom" title="View" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadDetail(item.id) }} className=" ps-3 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                         </td>
                       </tr>
