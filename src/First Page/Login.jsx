@@ -87,11 +87,11 @@ function Login() {
                 <h2 className="mb-4 text-center fs-1">Login Form</h2>
                 <form className="mb-3" onSubmit={ProceedLogin}>
                   <div className="form-floating mb-3">
-                    <input value={username} onChange={e=>usernameupdate(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="name@example.com" />
+                    <input value={username} name="name" onChange={e=>usernameupdate(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="name@example.com" />
                     <label htmlFor="floatngInput">User Name<span className="text-danger">*</span></label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input type="password" value={password} onChange={e=>passwordupdate(e.target.value)} className="form-control rounded-0" id="floatingPassword" placeholder="password" />
+                    <input type="password" name="password" value={password} onChange={e=>passwordupdate(e.target.value)} className="form-control rounded-0" id="floatingPassword" placeholder="password" />
                     <label htmlFor="floatngPassword">Password<span className="text-danger">*</span></label>
                   </div>
                   

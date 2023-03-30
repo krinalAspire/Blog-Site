@@ -17,17 +17,17 @@ function Home() {
   const npage=Math.ceil(blogData.length / recordsperpage);
   const numbers=[...Array(npage +1).keys()].slice(1);
 
-  const LoadDetail = (id) => {
-    navigate('/home/view/' + id)
+  const LoadDetail = (_id) => {
+    navigate('/home/view/' + _id)
   }
 
-  const LoadEdit = (id) => {
-    navigate('/home/edit/' + id)
+  const LoadEdit = (_id) => {
+    navigate('/home/edit/' + _id)
   }
 
-  const Removefunction = (id) => {
+  const Removefunction = (_id) => {
     if (window.confirm('are you sure you want to remove ?')) {
-      fetch("http://localhost:5000/blogs/" + id, {
+      fetch("http://localhost:5000/blogs/" + _id, {
         method: 'DELETE'
       }).then((res) => {
         toast.success('Removed successfully');
@@ -39,12 +39,12 @@ function Home() {
   }
 
   const usenavigate = useNavigate();
-  useEffect(() => {
-    let username = sessionStorage.getItem('username');
-    if (username === '' || username === null) {
-      usenavigate('/login');
-    }
-  }, []);
+  // useEffect(() => {
+  //   let username = sessionStorage.getItem('username');
+  //   if (username === '' || username === null) {
+  //     usenavigate('/login');
+  //   }
+  // }, []);
 
   useEffect(() => {
     fetch(" http://localhost:5000/blogs", {
@@ -119,16 +119,16 @@ function Home() {
                     records.filter((item)=>item.title.toLowerCase().includes(query))
                     .sort((a, b) => {return a.title.localeCompare(b.title);})
                     .map(item => (
-                      <tr key={item.id}>
+                      <tr key={item._id}>
                         {/* <td>{item.id}</td> */}
                         <td>{item.title}</td>
                         <td>{item.description}</td>
                         <td>{item.author}</td>
                         <td>{item.category}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item.id) }} className="pe-3 ps-2 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
-                          <a onClick={() => { LoadEdit(item.id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Edit"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                          <a onClick={() => { Removefunction(item.id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadDetail(item._id) }} className="pe-3 ps-2 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadEdit(item._id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Edit"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          <a onClick={() => { Removefunction(item._id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></a>
 
                         </td>
                       </tr>

@@ -3,14 +3,14 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Blogview(){
-    const {blogid}=useParams();
+    const {_id}=useParams();
     
     const[blogdata, BlogDatachange]=useState({});
 
     const navigate=useNavigate();
 
     useEffect(()=>{
-        fetch("http://localhost:5000/blogs/"+blogid,{
+        fetch("http://localhost:5000/blogs/"+_id,{
           method:'GET'}).then(result=>result.json())
           .then(result=>BlogDatachange(result)) 
         // }).then((resp)=>{

@@ -7,8 +7,8 @@ function Userlist(){
 
     const navigate = useNavigate();
 
-    const LoadDetail = (id) => {
-        navigate('/user/view/' + id)
+    const LoadDetail = (_id) => {
+        navigate('/user/view/' + _id)
       }
      
       useEffect(()=>{
@@ -81,7 +81,7 @@ function Userlist(){
                         <td>{item.address}</td>
                         <td>{item.gender}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item.id) }} className="ms-2 ps-4 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadDetail(item._id) }} className="ms-2 ps-4 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
                            </td>
                       </tr>
                     ))

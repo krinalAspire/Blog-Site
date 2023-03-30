@@ -3,12 +3,12 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Blogedit() {
-    const { blogid } = useParams();
+    const { _id } = useParams();
 
     const [Blogdata, blogdatachange] = useState({});
 
     useEffect(() => {
-        fetch("http://localhost:5000/blogs/" + blogid).then((res) => {
+        fetch("http://localhost:5000/blogs/" + _id).then((res) => {
             return res.json();
         }).then((resp) => {
             idchange(resp.id);
@@ -33,8 +33,8 @@ function Blogedit() {
         e.preventDefault();
         const bdata = { id, title, description, author, category };
 
-        fetch("http://localhost:5000/blogs/"+blogid, {
-            method: 'PUT',
+        fetch("http://localhost:5000/blogs/"+_id, {
+            method: 'PATCH',
             headers: { "content-type": "application/json" },
             body: JSON.stringify(bdata)
         }).then((res) => {

@@ -4,7 +4,7 @@ import {NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 function Register() {
-    const [id, idChange] = useState("");
+    const [userid, idChange] = useState("");
     const [name, nameChange] = useState("");
     const [password, passwordChange] = useState("");
     const [email, emailChange] = useState("");
@@ -18,7 +18,7 @@ function Register() {
     const IsValidate=()=>{
         let isproceed=true;
         let errormessage='Please enter the value in ';
-        if(id===null || id===''){
+        if(userid===null || userid===''){
             isproceed=false;
             errormessage += ' Username';
         }
@@ -49,7 +49,7 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let regobj={id,name,password,email,phone,country,address,gender};
+        let regobj={userid,name,password,email,phone,country,address,gender};
         if(IsValidate()){
         // console.log(regobj);
         fetch("http://localhost:5000/users",{
@@ -97,37 +97,37 @@ function Register() {
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>User Name<span className="text-danger">*</span></label>
-                                            <input value={id} onChange={e=>idChange(e.target.value)} className="form-control" />
+                                            <input value={userid} name="userid" onChange={e=>idChange(e.target.value)} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Password<span className="text-danger">*</span></label>
-                                            <input value={password} onChange={e=>passwordChange(e.target.value)}  type="password" className="form-control" />
+                                            <input value={password} name="password" onChange={e=>passwordChange(e.target.value)}  type="password" className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Full Name<span className="text-danger">*</span></label>
-                                            <input value={name} onChange={e=>nameChange(e.target.value)}  className="form-control" />
+                                            <input value={name} name="name" onChange={e=>nameChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Email<span className="text-danger">*</span></label>
-                                            <input value={email} onChange={e=>emailChange(e.target.value)}  className="form-control" />
+                                            <input value={email} name="email" onChange={e=>emailChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Phone<span className="text-danger">*</span></label>
-                                            <input value={phone} onChange={e=>phoneChange(e.target.value)}  className="form-control" />
+                                            <input value={phone} name="phone" onChange={e=>phoneChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>Country<span className="text-danger">*</span></label>
-                                            <select value={country} onChange={e=>countryChange(e.target.value)}  className="form-control">
+                                            <select value={country} name="country" onChange={e=>countryChange(e.target.value)}  className="form-control">
                                                 <option value="india">India</option>
                                                 <option value="usa">USA</option>
                                                 <option value="singapore">Singapore</option>
@@ -137,7 +137,7 @@ function Register() {
                                     <div className="col-lg-12">
                                         <div className="form-group">
                                             <label>Address</label>
-                                            <textarea value={address} onChange={e=>addressChange(e.target.value)}  className="form-control"></textarea>
+                                            <textarea value={address} name="address" onChange={e=>addressChange(e.target.value)}  className="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div className="col-lg-6">

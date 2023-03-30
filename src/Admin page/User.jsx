@@ -3,12 +3,12 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function User(){
-    const {userid}=useParams();
+    const {_id}=useParams();
     
     const[userdata, UserDatachange]=useState({});
 
     useEffect(()=>{
-        fetch("http://localhost:5000/users/"+userid,{
+        fetch("http://localhost:5000/users/"+_id,{
           method:'GET'}).then(result=>result.json())
           .then(result=>UserDatachange(result)) 
         // }).then((resp)=>{

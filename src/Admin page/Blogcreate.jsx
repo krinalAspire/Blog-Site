@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Blogcreate() {
-    const [id, idchange] = useState("");
+    const [blogid, idchange] = useState("");
     const [title, titlechange] = useState("");
     const [description, descriptionchange] = useState("");
     const [author, authorchange] = useState("");
@@ -13,7 +13,7 @@ function Blogcreate() {
 
     const handlesubmit=(e)=>{
         e.preventDefault();
-        const bdata={id,title,description,author,category};
+        const bdata={title,description,author,category};
        
         fetch("http://localhost:5000/blogs",{
             method:'POST',
@@ -65,31 +65,31 @@ function Blogcreate() {
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>ID</label>
-                                        <input value={id} disabled='disabled' className="form-control" placeholder="disabled" />
+                                        <input value={blogid} disabled='disabled' className="form-control" placeholder="disabled" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>Title</label>
-                                        <input value={title} onChange={e => titlechange(e.target.value)} className="form-control" />
+                                        <input value={title} name="title" onChange={e => titlechange(e.target.value)} className="form-control" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>Description</label>
-                                        <textarea value={description} onChange={e=>descriptionchange(e.target.value)} className="form-control"></textarea>
+                                        <textarea value={description} name="description" onChange={e=>descriptionchange(e.target.value)} className="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>Author</label>
-                                        <input value={author} onChange={e => authorchange(e.target.value)} className="form-control" />
+                                        <input value={author} name="author" onChange={e => authorchange(e.target.value)} className="form-control" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label>Category</label>
-                                        <select value={category} onChange={e => categorychange(e.target.value)} className="form-control">
+                                        <select value={category} name="category" onChange={e => categorychange(e.target.value)} className="form-control">
                                             <option value="cs-it">CS-IT</option>
                                             <option value="travel">Travel</option>
                                             <option value="food">Food</option>
