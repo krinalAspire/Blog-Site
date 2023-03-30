@@ -39,12 +39,12 @@ function Home() {
   }
 
   const usenavigate = useNavigate();
-  // useEffect(() => {
-  //   let username = sessionStorage.getItem('username');
-  //   if (username === '' || username === null) {
-  //     usenavigate('/login');
-  //   }
-  // }, []);
+  useEffect(() => {
+    let username = sessionStorage.getItem('username');
+    if (username === '' || username === null) {
+      usenavigate('/login');
+    }
+  }, []);
 
   useEffect(() => {
     fetch(" http://localhost:5000/blogs", {

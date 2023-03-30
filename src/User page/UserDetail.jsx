@@ -7,8 +7,8 @@ function UserDetail(){
 
     const navigate = useNavigate();
 
-    const LoadDetail = (id) => {
-        navigate('/home/view/' + id)
+    const LoadDetail = (_id) => {
+        navigate('/home/view/' + _id)
       }
 
     useEffect(()=>{
@@ -60,7 +60,7 @@ function UserDetail(){
               <table className="table table-bordered text-white">
                 <thead className="text-white">
                   <tr>
-                    <td>ID</td>
+                    {/* <td>ID</td> */}
                     <td>Title</td>
                     <td className="col-sm-6">Description</td>
                     <td>Author</td>
@@ -71,14 +71,14 @@ function UserDetail(){
                 <tbody>
                   {blogData &&
                     blogData.map(item => (
-                      <tr key={item.id}>
-                        <td>{item.id}</td>
+                      <tr key={item._id}>
+                        {/* <td>{item.id}</td> */}
                         <td>{item.title}</td>
                         <td>{item.description}</td>
                         <td>{item.author}</td>
                         <td>{item.category}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item.id) }} className=" ps-3 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadDetail(item._id) }} className=" ps-3 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                         </td>
                       </tr>
