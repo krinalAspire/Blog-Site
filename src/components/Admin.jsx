@@ -40,8 +40,8 @@ function Home() {
 
   const usenavigate = useNavigate();
   useEffect(() => {
-    let username = sessionStorage.getItem('username');
-    if (username === '' || username === null) {
+    let userData = localStorage.getItem('userData');
+    if (userData === '' || userData === null) {
       usenavigate('/login');
     }
   }, []);
@@ -117,7 +117,7 @@ function Home() {
                   
                   {
                     records.filter((item)=>item.title.toLowerCase().includes(query))
-                    .sort((a, b) => {return a.title.localeCompare(b.title);})
+                    .sort((a, b) => {return a._id.localeCompare(b._id);})
                     .map(item => (
                       <tr key={item._id}>
                         {/* <td>{item.id}</td> */}

@@ -3,47 +3,72 @@ import {NavLink ,Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Login() {
-  const [username, usernameupdate] = useState('');
+  const [userid, useridupdate] = useState('');
   const [password, passwordupdate] = useState('');
 
   const usenavigate=useNavigate();
 
   useEffect(()=>{
-    sessionStorage.clear();
+    localStorage.clear();
   },[]);
 
   const ProceedLogin = (e) => {
     e.preventDefault();
+    let regobj={userid,password};
     if(validate()){
       //  console.log("proceed");
-      fetch("http://localhost:5000/users/"+username).then((res)=>{
+      fetch("http://localhost:5000/login",{
+            method:"POST",
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(regobj)
+      }).then((res)=>{
         return res.json();
-      }).then((resp)=>{
-         //console.log(resp)
-         if(Object.keys(resp).length===0){
-          toast.error('Please Enter valid username');
-         } else{
-           if(resp.password===password){
-              toast.success('Success');
-              sessionStorage.setItem ('username',username);
-              usenavigate('/home')
-           } else{
-             toast.error('please Enter valid password');
-           }
-           if(resp.role==='admin'){
-              usenavigate('/home')
-           }else{
-              usenavigate('/user')
-           }
-         }
-      }).catch((err)=>{
+      }).then((data)=>{
+        console.log("res",data);
+        const token=data.token;
+        const varifiedData={data:data.data,token:token}
+        localStorage.setItem("userData",JSON.stringify(varifiedData))
+
+        if(!token){
+           toast.error("User not Found");
+        } else {
+          usenavigate("/home");
+          // if(varifiedData.data.role==="admin"){
+          //   usenavigate("/home")
+          //   toast.success("Login Succesfully")  
+          // }else{
+          //   usenavigate("/user")
+          //   toast.success("Login SuccesFully")
+          // }
+        }
+      })
+      // .then((resp)=>{
+      //    //console.log(resp)
+      //    if(Object.keys(resp).length===0){
+      //     toast.error('Please Enter valid username');
+      //    } else{
+      //      if(resp.password===password){
+      //         toast.success('Success');
+      //         localStorage.setItem ('userid',userid);
+      //         usenavigate('/home')
+      //      } else{
+      //        toast.error('please Enter valid password');
+      //      }
+      //      if(resp.role==='admin'){
+      //         usenavigate('/home')
+      //      }else{
+      //         usenavigate('/user')
+      //      }
+      //    }
+      // })
+      .catch((err)=>{
        toast.error('Login Failed due to'+err.message);
       });
     }
   }
   const validate=()=>{
     let result=true;
-    if(username==='' || username===null){
+    if(userid==='' || userid===null){
       result=false;
       toast.warning('Please Enter Username')
     }
@@ -87,7 +112,7 @@ function Login() {
                 <h2 className="mb-4 text-center fs-1">Login Form</h2>
                 <form className="mb-3" onSubmit={ProceedLogin}>
                   <div className="form-floating mb-3">
-                    <input value={username} name="name" onChange={e=>usernameupdate(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="name@example.com" />
+                    <input value={userid} name="userid" onChange={e=>useridupdate(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="name@example.com" />
                     <label htmlFor="floatngInput">User Name<span className="text-danger">*</span></label>
                   </div>
                   <div className="form-floating mb-3">
