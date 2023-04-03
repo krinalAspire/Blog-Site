@@ -56,7 +56,6 @@ function Login() {
           //   toast.success("Login SuccesFully")
           // }
         }
-        return varifiedData;
       })
       // .then((resp)=>{
       //    //console.log(resp)
