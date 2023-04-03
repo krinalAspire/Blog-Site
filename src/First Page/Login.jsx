@@ -12,6 +12,19 @@ function Login() {
     localStorage.clear();
   },[]);
 
+  const validate=()=>{
+    let result=true;
+    if(userid==='' || userid===null){
+      result=false;
+      toast.warning('Please Enter Username')
+    }
+    if(password==='' || password===null){
+      result=false;
+      toast.warning('Please Enter Password')
+    }
+    return result;
+  }
+
   const ProceedLogin = (e) => {
     e.preventDefault();
     let regobj={userid,password};
@@ -19,21 +32,23 @@ function Login() {
       //  console.log("proceed");
       fetch("http://localhost:5000/login",{
             method:"POST",
-            headers:{'content-type':'application/json'},
+            headers:{'Content-Type':'application/json'},
             body:JSON.stringify(regobj)
       }).then((res)=>{
         return res.json();
       }).then((data)=>{
-        console.log("res",data);
+        // console.log("res",data);
         const token=data.token;
+        // console.log(data.role);
         const varifiedData={data:data.data,token:token}
         localStorage.setItem("userData",JSON.stringify(varifiedData))
-
+        
         if(!token){
-           toast.error("User not Found");
+          toast.error("User not Found");
         } else {
           usenavigate("/home");
           // if(varifiedData.data.role==="admin"){
+           
           //   usenavigate("/home")
           //   toast.success("Login Succesfully")  
           // }else{
@@ -41,6 +56,7 @@ function Login() {
           //   toast.success("Login SuccesFully")
           // }
         }
+        return varifiedData;
       })
       // .then((resp)=>{
       //    //console.log(resp)
@@ -66,18 +82,7 @@ function Login() {
       });
     }
   }
-  const validate=()=>{
-    let result=true;
-    if(userid==='' || userid===null){
-      result=false;
-      toast.warning('Please Enter Username')
-    }
-    if(password==='' || password===null){
-      result=false;
-      toast.warning('Please Enter Password')
-    }
-    return result;
-  }
+
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>
