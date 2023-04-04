@@ -11,17 +11,14 @@ import Blogview from './Admin page/Blogview';
 import UserDetail from './User page/UserDetail';
 import Userlist from './Admin page/Userlist';
 import User from './Admin page/User';
-import About1 from './components/About1';
 
 function App() {
-  // style={{ backgroundImage: `url("https://wallpaperset.com/w/full/e/c/a/67435.jpg")`}}
   return (
     <div className="App" >
       <Routes>
-        {/* <Route path='/admin' element={<Admin/>}/> */}
            <Route path='/' element={ <Header/>}/>
            <Route path='/user' element={<UserDetail/>}/>
-           <Route path='userlist' element={<Userlist/>}/>
+           <Route path='/userlist' element={<Userlist/>}/>
            <Route path='/user/view/:_id' element={<User/>} />
            <Route path='/login' element={<Login/>}/>
            <Route path='/register' element={<Register/>}/>
@@ -30,8 +27,8 @@ function App() {
            
            <Route path='/home/*' element={<Home/>} />
           <Route path='/about' element={<About/>}/>
-          <Route path='/Aboutuser' element={<About1/>}/>
           <Route path="/create" element={<Blogcreate/>}/>
+          
        </Routes> 
        
     </div>

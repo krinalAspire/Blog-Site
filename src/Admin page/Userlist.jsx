@@ -3,9 +3,17 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Userlist(){
-    const[blogData, BlogDatachange]=useState(null);
+    const[userData, userDatachange]=useState(null);
 
     const navigate = useNavigate();
+
+    
+    // useEffect(() => {
+    //   let userData = localStorage.getItem('userData');
+    //   if (userData === '' || userData === null) {
+    //     navigate('/login');
+    //   }
+    // }, []);
 
     const LoadDetail = (_id) => {
         navigate('/user/view/' + _id)
@@ -14,7 +22,7 @@ function Userlist(){
       useEffect(()=>{
         fetch("http://localhost:5000/users",{
           method:'GET'}).then(result=>result.json())
-          .then(result=>BlogDatachange(result)) 
+          .then(result=>userDatachange(result)) 
         // }).then((resp)=>{
         //   console.log(resp)
         //   // toast.success('Success'); 
@@ -71,9 +79,9 @@ function Userlist(){
                   </tr>
                 </thead>
                 <tbody>
-                  {blogData &&
-                    blogData.map(item => (
-                      <tr key={item.id}>
+                  {userData &&
+                    userData.map(item => (
+                      <tr key={item._id}>
                         <td>{item.name}</td>
                         <td>{item.email}</td>
                         <td>{item.phone}</td>

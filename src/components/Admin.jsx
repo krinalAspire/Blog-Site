@@ -117,12 +117,12 @@ function Home() {
                   
                   {
                     records.filter((item)=>item.title.toLowerCase().includes(query))
-                    .sort((a, b) => {return a._id.localeCompare(b._id);})
+                    .sort((a, b) => {return a.title.localeCompare(b.title);})
                     .map(item => (
                       <tr key={item._id}>
                         {/* <td>{item.id}</td> */}
                         <td>{item.title}</td>
-                        <td>{item.description}</td>
+                        <td className="description">{item.description}</td>
                         <td>{item.author}</td>
                         <td>{item.category}</td>
                         <td>

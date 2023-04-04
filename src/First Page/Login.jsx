@@ -39,23 +39,23 @@ function Login() {
       }).then((data)=>{
         // console.log("res",data);
         const token=data.token;
-        // console.log(data.role);
+        console.log(data.data);
         const varifiedData={data:data.data,token:token}
         localStorage.setItem("userData",JSON.stringify(varifiedData))
         
         if(!token){
           toast.error("User not Found");
         } else {
-          usenavigate("/home");
-          // if(varifiedData.data.role==="admin"){
+          // usenavigate("/home");
+          if(varifiedData.data.role==="admin"){
            
-          //   usenavigate("/home")
-          //   toast.success("Login Succesfully")  
-          // }else{
-          //   usenavigate("/user")
-          //   toast.success("Login SuccesFully")
-          // }
-        }
+            usenavigate("/home")
+            toast.success("Login Succesfully")  
+          }else{
+            usenavigate("/user")
+            toast.success("Login SuccesFully")
+          }
+        } 
       })
       // .then((resp)=>{
       //    //console.log(resp)

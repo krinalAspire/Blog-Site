@@ -1,8 +1,7 @@
 import React from "react";
 import { NavLink, Route, Routes} from "react-router-dom";
 import Blogpage from "./First Page/Blogpage";
-import Login from "./First Page/Login";
-import Register from "./First Page/Register";
+
 
 function Header() {
     return (
@@ -21,12 +20,6 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link text-white" to="/about">About</NavLink>
                             </li>
-                            {/* <li className="nav-item">
-                                 <NavLink to="/login" className="nav-link text-white"><span className="fa fa-sign-in me-2"></span>Login</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                 <NavLink to="/register" className="nav-link text-white" ><span className="fa fa-user-plus me-2"></span>Register</NavLink>
-                            </li> */}
                         </ul>
                     </div>
                     <NavLink to="/login" className="navbar-brand mx-auto nav-link text-white btn btn-outline-success p-1"><span className="fa fa-sign-in me-2"></span>Login</NavLink>

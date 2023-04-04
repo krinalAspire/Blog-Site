@@ -3,9 +3,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function UserDetail(){
-    const[blogData, BlogDatachange]=useState(null);
+    const[blogData, BlogDatachange]=useState([]);
+    const [query,setQuery]=useState("");
 
     const navigate = useNavigate();
+
+    const[currentpage,setcurrentpage]=useState(1);
+    const recordsperpage=3;
+    const lastIndex=currentpage * recordsperpage;
+    const firstIndex= lastIndex - recordsperpage;
+    const records= blogData.slice(firstIndex, lastIndex);
+    const npage=Math.ceil(blogData.length / recordsperpage);
+    const numbers=[...Array(npage +1).keys()].slice(1);
 
     const LoadDetail = (_id) => {
         navigate('/home/view/' + _id)
@@ -37,11 +46,8 @@ function UserDetail(){
                                 <NavLink className="nav-link text-white" aria-current="page" to={'/user'}>Home</NavLink>
                             </li> */}
                             <li className="nav-item">
-                                <NavLink className="nav-link text-white" to="/Aboutuser">About</NavLink>
+                                <NavLink className="nav-link text-white" to="/about">About</NavLink>
                             </li>
-                            {/* <li>
-                              <NavLink className="nav-link text-white" to={'/login'} style={{float: 'right'}}>Logout</NavLink>
-                            </li> */}
                         </ul>
                     </div>
                     <span className="navbar-brand nav-link text-white fw-bold">Welcome User</span>
@@ -51,13 +57,20 @@ function UserDetail(){
 
             <div>
         <div className="container">
-          <div className="text-white " >
-            <div >
+          <div className="pt-5 text-white " >
+            <div>
               <h2>Blog List</h2>
             </div>
             <div>
+              <div className="mb-2">
+              <input type="text"
+                // className="mb-2"
+                placeholder='Search title here...'
+                onChange={(e)=>setQuery(e.target.value)}
+            />
+              </div>
               
-              <table className="table table-bordered text-white">
+              <table className="blogtable table table-bordered text-white">
                 <thead className="text-white">
                   <tr>
                     {/* <td>ID</td> */}
@@ -69,8 +82,8 @@ function UserDetail(){
                   </tr>
                 </thead>
                 <tbody>
-                  {blogData &&
-                    blogData.map(item => (
+                  {
+                    records.filter((item)=>item.title.toLowerCase().includes(query)).map(item => (
                       <tr key={item._id}>
                         {/* <td>{item.id}</td> */}
                         <td>{item.title}</td>
@@ -86,12 +99,47 @@ function UserDetail(){
                   }
                 </tbody>
               </table>
+
+              <nav>
+                <ul className="pagination">
+                    <li className="page-item"> 
+                        <a href="#" className="page-link" onClick={prePage}>Prev</a>
+                    </li>
+                    {
+                      numbers.map((n,i)=>(
+                        <li className={`page-item ${currentpage === n ? 'active' : ''}`} key={i}>
+                           <a href="#" className="page-link" onClick={()=>changeCpage(n)}>{n}</a>
+                        </li>
+                      ))
+                    }
+                    <li className="page-item">
+                        <a href="#" className="page-link" onClick={nextPage}>Next</a>
+                    </li>
+                </ul>
+              </nav>
+
             </div>
           </div>
         </div>
       </div>
         </>
     );
+
+    function prePage(){
+      if(currentpage !== firstIndex){
+       setcurrentpage(currentpage -1)
+      }
+ }
+
+ function nextPage(){
+     if(currentpage !== lastIndex)
+     setcurrentpage(currentpage +1)
+ }
+
+ function changeCpage(id){
+     setcurrentpage(id)
+ }
+
 }
 
 export default UserDetail;

@@ -44,6 +44,16 @@ function Register() {
                 toast.warning('Please enter the valid email')
             }
         }
+        if(!isproceed){
+            toast.warning(errormessage)
+        } else {
+            if(/^\d{10}$/.test(phone)){
+
+            }else {
+                isproceed=false;
+                toast.warning("please enter the valid phone number")
+            }
+        }
         return isproceed;
     }
 
@@ -95,37 +105,37 @@ function Register() {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>User Name<span className="text-danger">*</span></label>
                                             <input value={userid} name="userid" onChange={e=>idChange(e.target.value)} className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Password<span className="text-danger">*</span></label>
                                             <input value={password} name="password" onChange={e=>passwordChange(e.target.value)}  type="password" className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Full Name<span className="text-danger">*</span></label>
                                             <input value={name} name="name" onChange={e=>nameChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Email<span className="text-danger">*</span></label>
                                             <input value={email} name="email" onChange={e=>emailChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Phone<span className="text-danger">*</span></label>
                                             <input value={phone} name="phone" onChange={e=>phoneChange(e.target.value)}  className="form-control" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Country<span className="text-danger">*</span></label>
                                             <select value={country} name="country" onChange={e=>countryChange(e.target.value)}  className="form-control">
                                                 <option value="india">India</option>
@@ -135,25 +145,27 @@ function Register() {
                                         </div>
                                     </div>
                                     <div className="col-lg-12">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Address</label>
                                             <textarea value={address} name="address" onChange={e=>addressChange(e.target.value)}  className="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
-                                        <div className="form-group">
+                                        <div className="m-2 form-group">
                                             <label>Gender</label>
                                             <br></br>
-                                            <input type="radio" checked={gender==="male"} onChange={e=>genderChange(e.target.value)}  name="gender" value="male" className="form-check-input" />
-                                            <label className="form-check-label">Male</label>
+                                            <div>
+                                            <input type="radio" checked={gender==="male"} onChange={e=>genderChange(e.target.value)}  name="gender" value="male" className=" form-check-input" />
+                                            <label className="me-3 form-check-label">Male</label>
                                             <input type="radio" checked={gender==="female"} onChange={e=>genderChange(e.target.value)}  name="gender" value="female" className="form-check-input" />
                                             <label className="form-check-label">Female</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button type="submit" className="btn btn-primary">Register</button> |
+                                <button type="submit" className="me-2 btn btn-primary">Register</button> |
                                 <Link to={"/"} className="btn btn-danger">Back</Link>
                             </div>
                         </div>

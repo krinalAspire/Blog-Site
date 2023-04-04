@@ -57,24 +57,6 @@ function Blogpage() {
                           </div>
                           ))
                         }
-                        {/* <div className="card">
-
-                            {blogData &&
-                                blogData.map(item => (
-                                    <div className="mt-2">
-                                    <div class="card-header">
-                                {item.title}
-                            </div>
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>{item.description}</p>
-                                    <footer class="blockquote-footer">By {item.author} <cite title="Source Title">{item.category}</cite></footer>
-                                </blockquote>
-                            </div>
-                            </div>
-                                ))
-                            }
-                        </div> */}
                     </div>
                 
                 {/* <nav>
