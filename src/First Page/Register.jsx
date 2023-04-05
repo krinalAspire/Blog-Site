@@ -125,13 +125,13 @@ function Register() {
                                     <div className="col-lg-6">
                                         <div className="m-2 form-group">
                                             <label>Email<span className="text-danger">*</span></label>
-                                            <input value={email} name="email" onChange={e=>emailChange(e.target.value)}  className="form-control" />
+                                            <input value={email} name="email" onChange={e=>emailChange(e.target.value)}  className="form-control" placeholder="johndue@gmail.com" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="m-2 form-group">
                                             <label>Phone<span className="text-danger">*</span></label>
-                                            <input value={phone} name="phone" onChange={e=>phoneChange(e.target.value)}  className="form-control" />
+                                            <input value={phone} name="phone" onChange={e=>phoneChange(e.target.value)}  className="form-control" placeholder="0123456789" />
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
@@ -165,7 +165,7 @@ function Register() {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button type="submit" className="me-2 btn btn-primary">Register</button> |
+                                <button type="submit" className="me-3 btn btn-primary">Register</button> 
                                 <Link to={"/"} className="btn btn-danger">Back</Link>
                             </div>
                         </div>

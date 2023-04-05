@@ -42,7 +42,7 @@ function Login() {
         console.log(data.data);
         const varifiedData={data:data.data,token:token}
         localStorage.setItem("userData",JSON.stringify(varifiedData))
-        
+
         if(!token){
           toast.error("User not Found");
         } else {

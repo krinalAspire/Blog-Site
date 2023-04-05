@@ -7,7 +7,6 @@ function Userlist(){
 
     const navigate = useNavigate();
 
-    
     // useEffect(() => {
     //   let userData = localStorage.getItem('userData');
     //   if (userData === '' || userData === null) {
@@ -15,9 +14,27 @@ function Userlist(){
     //   }
     // }, []);
 
+    const LoadEdit = (_id) => {
+      navigate('/user/edit/' + _id)
+    }
+
     const LoadDetail = (_id) => {
         navigate('/user/view/' + _id)
       }
+
+    
+  const Removefunction = (_id) => {
+    if (window.confirm('are you sure you want to remove ?')) {
+      fetch("http://localhost:5000/users/" + _id, {
+        method: 'DELETE'
+      }).then((res) => {
+        toast.success('Removed successfully');
+        window.location.reload();
+      }).catch((err) => {
+        toast.error("Failed:" + err.message);
+      })
+    }
+  }  
      
       useEffect(()=>{
         fetch("http://localhost:5000/users",{
@@ -75,6 +92,7 @@ function Userlist(){
                     <td>Country</td>
                     <td>Address</td>
                     <td>Gender</td>
+                    <td>Role</td>
                     <td>Action</td>
                   </tr>
                 </thead>
@@ -88,8 +106,11 @@ function Userlist(){
                         <td>{item.country}</td>
                         <td>{item.address}</td>
                         <td>{item.gender}</td>
+                        <td>{item.role}</td>
                         <td>
-                          <a onClick={() => { LoadDetail(item._id) }} className="ms-2 ps-4 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
+                        <a onClick={() => { LoadDetail(item._id) }} className="pe-3 ps-2 text-white" data-toggle="tooltip" data-placement="bottom" title="View" ><i className="fa fa-eye" aria-hidden="true"></i></a>
+                          <a onClick={() => { LoadEdit(item._id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Edit"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          <a onClick={() => { Removefunction(item._id) }} className="pe-3 text-white" data-toggle="tooltip" data-placement="bottom" title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></a>
                            </td>
                       </tr>
                     ))

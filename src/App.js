@@ -11,22 +11,28 @@ import Blogview from './Admin page/Blogview';
 import UserDetail from './User page/UserDetail';
 import Userlist from './Admin page/Userlist';
 import User from './Admin page/User';
+import UserEdit from './Admin page/UserEdit';
 
 function App() {
   return (
     <div className="App" >
       <Routes>
            <Route path='/' element={ <Header/>}/>
+           
            <Route path='/user' element={<UserDetail/>}/>
            <Route path='/userlist' element={<Userlist/>}/>
            <Route path='/user/view/:_id' element={<User/>} />
+           <Route path='/user/edit/:_id' element={<UserEdit/>}/>
+           
            <Route path='/login' element={<Login/>}/>
            <Route path='/register' element={<Register/>}/>
+          
            <Route path="/home/edit/:_id" element={<Blogedit/>}/>
            <Route path="/home/view/:_id" element={<Blogview/>}/>
            
-           <Route path='/home/*' element={<Home/>} />
+           <Route path='/home' element={<Home/>} />
           <Route path='/about' element={<About/>}/>
+          
           <Route path="/create" element={<Blogcreate/>}/>
           
        </Routes> 
