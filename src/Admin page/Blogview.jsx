@@ -45,7 +45,7 @@ function Blogview(){
         </div>
       </nav>
 
-      <div className="container">
+      <div className="blogview container">
            <div>
               <div>
                 <h1 className="text-white">Blog Details</h1>

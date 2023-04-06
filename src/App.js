@@ -30,7 +30,7 @@ function App() {
            <Route path="/home/edit/:_id" element={<Blogedit/>}/>
            <Route path="/home/view/:_id" element={<Blogview/>}/>
            
-           <Route path='/home' element={<Home/>} />
+           <Route path='/home/*' element={<Home/>} />
           <Route path='/about' element={<About/>}/>
           
           <Route path="/create" element={<Blogcreate/>}/>

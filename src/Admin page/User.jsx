@@ -7,6 +7,9 @@ function User(){
     
     const[userdata, UserDatachange]=useState({});
 
+    const User=JSON.parse(localStorage.getItem("userData"));
+    const adminId=User.data.userid
+
     useEffect(()=>{
         fetch("http://localhost:5000/users/"+_id,{
           method:'GET'}).then(result=>result.json())
@@ -38,7 +41,7 @@ function User(){
               </li> */}
             </ul>
           </div>
-          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin User</span>
+          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin:- {adminId}</span>
           <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
         </div>
       </nav>

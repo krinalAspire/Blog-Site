@@ -7,6 +7,9 @@ function UserEdit() {
 
     const navigate = useNavigate();
 
+    const User=JSON.parse(localStorage.getItem("userData"));
+    const adminId=User.data.userid
+
     const [name, namechange] = useState("");
     const [email, emailchange] = useState("");
     const [phone, phonechange] = useState("");
@@ -67,14 +70,14 @@ const handlesubmit = (e) => {
                             </li> */}
             </ul>
           </div>
-          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin User</span>
+          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin:- {adminId}</span>
           <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
         </div>
       </nav>
 
 
       <div className="row">
-        <div className="blogedit offset-lg-3 col-lg-6">
+        <div className="useredit offset-lg-3 col-lg-6">
           <form className="container text-white" onSubmit={handlesubmit}>
             <div>
               <h2>User Edit</h2>

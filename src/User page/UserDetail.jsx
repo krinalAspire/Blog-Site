@@ -8,6 +8,9 @@ function UserDetail(){
 
     const navigate = useNavigate();
 
+    const User=JSON.parse(localStorage.getItem("userData"));
+    const userId=User.data.userid
+
     const[currentpage,setcurrentpage]=useState(1);
     const recordsperpage=3;
     const lastIndex=currentpage * recordsperpage;
@@ -50,7 +53,7 @@ function UserDetail(){
                             </li>
                         </ul>
                     </div>
-                    <span className="navbar-brand nav-link text-white fw-bold">Welcome User</span>
+                    <span className="navbar-brand nav-link text-white fw-bold">Welcome User:-{userId}</span>
           <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
                 </div>
             </nav>

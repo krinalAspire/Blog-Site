@@ -59,6 +59,8 @@ function Home() {
         toast.error("Failed : " + err.message);
       })
   }, []);
+
+  
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>
@@ -80,7 +82,9 @@ function Home() {
               </li> */}
             </ul>
           </div>
-          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin User</span>
+          <span className="navbar-brand nav-link text-white fw-bold">
+            Welcome Admin User
+           </span>
             <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
         </div>
       </nav>

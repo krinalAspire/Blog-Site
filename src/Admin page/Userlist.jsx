@@ -7,6 +7,10 @@ function Userlist(){
 
     const navigate = useNavigate();
 
+    const User=JSON.parse(localStorage.getItem("userData"));
+    const adminId=User.data.userid
+    // console.log(adminId);
+
     // useEffect(() => {
     //   let userData = localStorage.getItem('userData');
     //   if (userData === '' || userData === null) {
@@ -70,7 +74,7 @@ function Userlist(){
               </li> */}
             </ul>
           </div>
-          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin User</span>
+          <span className="navbar-brand nav-link text-white fw-bold">Welcome Admin :- {adminId}</span>
           <NavLink to={'/login'} className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-sign-out me-2"></span>Logout</NavLink>
         </div>
       </nav>

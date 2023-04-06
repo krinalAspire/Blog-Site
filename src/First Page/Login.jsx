@@ -39,12 +39,11 @@ function Login() {
       }).then((data)=>{
         // console.log("res",data);
         const token=data.token;
-        console.log(data.data);
         const varifiedData={data:data.data,token:token}
         localStorage.setItem("userData",JSON.stringify(varifiedData))
 
         if(!token){
-          toast.error("User not Found");
+          toast.error("Invalid Login");
         } else {
           // usenavigate("/home");
           if(varifiedData.data.role==="admin"){
