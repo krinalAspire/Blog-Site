@@ -12,6 +12,8 @@ import UserDetail from './User page/UserDetail';
 import Userlist from './Admin page/Userlist';
 import User from './Admin page/User';
 import UserEdit from './Admin page/UserEdit';
+import PasswordReset from './components/PasswordReset';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
           <Route path='/about' element={<About/>}/>
           
           <Route path="/create" element={<Blogcreate/>}/>
+
+          <Route path='/password-reset' element={<PasswordReset/>}/>
+          <Route path='/forgotpassword/:id/:token' element={<ForgotPassword/>}/>
           
        </Routes> 
        
