@@ -128,7 +128,9 @@ function Login() {
                   </div>
                   <div className="mb-3 text-right">
                     <div>Don't have any account?<Link to={"/register"} title="get registered here" className="text-decoration-none">create one</Link></div>
-                    <div>Forgot Password?<Link to={"/password-reset"} className="text-decoration-none">Click Here</Link></div>
+                  </div>
+                  <div className="mb-3 text-right">
+                    <div><Link to={"/password-reset"} className="text-decoration-none">Forgot Password ?</Link></div>
                   </div>
                 </form>
               </div>

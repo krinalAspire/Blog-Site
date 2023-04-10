@@ -92,4 +92,8 @@ input[type=text] {
   blogview{
     height: 80vh;
   }
+
+  .error{
+    height: 80vh;
+  }
   

@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Userlist(){
-    const[userData, userDatachange]=useState(null);
+    const[userData, userDatachange]=useState([]);
 
     const navigate = useNavigate();
 
@@ -17,6 +17,14 @@ function Userlist(){
     //     navigate('/login');
     //   }
     // }, []);
+
+  const[currentpage,setcurrentpage]=useState(1);
+  const recordsperpage=8;
+  const lastIndex=currentpage * recordsperpage;
+  const firstIndex= lastIndex - recordsperpage;
+  const records= userData.slice(firstIndex, lastIndex);
+  const npage=Math.ceil(userData.length / recordsperpage);
+  const numbers=[...Array(npage +1).keys()].slice(1);
 
     const LoadEdit = (_id) => {
       navigate('/user/edit/' + _id)
@@ -33,7 +41,17 @@ function Userlist(){
         method: 'DELETE'
       }).then((res) => {
         toast.success('Removed successfully');
-        window.location.reload();
+        // window.location.reload();\
+        fetch("http://localhost:5000/users",{
+          method:'GET'}).then(result=>result.json())
+          .then(result=>userDatachange(result)) 
+        // }).then((resp)=>{
+        //   console.log(resp)
+        //   // toast.success('Success'); 
+        // })
+        .catch((err)=>{
+          toast.error("Failed : " + err.message);
+        })
       }).catch((err) => {
         toast.error("Failed:" + err.message);
       })
@@ -101,8 +119,8 @@ function Userlist(){
                   </tr>
                 </thead>
                 <tbody>
-                  {userData &&
-                    userData.map(item => (
+                  {
+                    records.map(item => (
                       <tr key={item._id}>
                         <td>{item.name}</td>
                         <td>{item.email}</td>
@@ -121,12 +139,47 @@ function Userlist(){
                   }
                 </tbody>
               </table>
+             
+              <nav>
+                <ul className="pagination">
+                    <li className="page-item"> 
+                        <a href="#" className="page-link" onClick={prePage}>Prev</a>
+                    </li>
+                    {
+                      numbers.map((n,i)=>(
+                        <li className={`page-item ${currentpage === n ? 'active' : ''}`} key={i}>
+                           <a href="#" className="page-link" onClick={()=>changeCpage(n)}>{n}</a>
+                        </li>
+                      ))
+                    }
+                    <li className="page-item">
+                        <a href="#" className="page-link" onClick={nextPage}>Next</a>
+                    </li>
+                </ul>
+              </nav>
+
+
             </div>
           </div>
         </div>
       </div>
         </>
     );
+ function prePage(){
+      if(currentpage !== firstIndex){
+       setcurrentpage(currentpage -1)
+      }
+ }
+
+ function nextPage(){
+     if(currentpage !== lastIndex)
+     setcurrentpage(currentpage +1)
+ }
+
+ function changeCpage(id){
+     setcurrentpage(id)
+ }
 }
+
 
 export default Userlist;

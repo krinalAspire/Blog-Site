@@ -14,6 +14,7 @@ import User from './Admin page/User';
 import UserEdit from './Admin page/UserEdit';
 import PasswordReset from './components/PasswordReset';
 import ForgotPassword from './components/ForgotPassword';
+import Errorpage from './components/Errorpage';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
 
           <Route path='/password-reset' element={<PasswordReset/>}/>
           <Route path='/forgotpassword/:id/:token' element={<ForgotPassword/>}/>
+          <Route path="/errorpage" element={<Errorpage/>} />
           
        </Routes> 
        

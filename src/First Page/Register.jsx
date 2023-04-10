@@ -37,7 +37,9 @@ function Register() {
         if(!isproceed){
             toast.warning(errormessage)
         } else {
-            if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)){
+            // if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email))
+            if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+            {
                 
             }else{
                 isproceed=false;
