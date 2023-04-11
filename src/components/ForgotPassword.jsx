@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function ForgotPassword() {
@@ -25,7 +25,7 @@ function ForgotPassword() {
         if(data.status===201){
             console.log("user valid")
         } else{
-            navigate("/errorpage")
+            navigate("*")
         }
     }
 
@@ -92,12 +92,13 @@ function ForgotPassword() {
 
                                 <form className="mb-3" onSubmit={sendPassword}>
                                     <div className="form-floating mb-3">
-                                        <input name="password" value={password} onChange={e=>setpassword(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="Enter Your New Password" />
+                                        <input type="password" name="password" value={password} onChange={e=>setpassword(e.target.value)} className="form-control rounded-0" id="floatingInput" placeholder="Enter Your New Password" />
                                         <label htmlFor="floatngInput">New Password<span className="text-danger">*</span></label>
                                     </div>
 
                                     <div className="d-grid gap-2 mb-3">
                                         <button type="submit" className="btn btn-dark btn-lg border-0 rounded-0">Send</button>
+                                        {message? <Link to="/login" className="btn btn-primary">Go to Login</Link>:""}
                                     </div>
                                 </form>
                             </div>

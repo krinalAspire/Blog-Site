@@ -32,7 +32,7 @@ function Errorpage(){
             <div>
            <div className="error card">
               <div className="card-title">
-                <h1>404 Error</h1>
+                <h1>Oops !!</h1>
                 <hr/>
               </div>
 

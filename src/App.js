@@ -40,7 +40,7 @@ function App() {
 
           <Route path='/password-reset' element={<PasswordReset/>}/>
           <Route path='/forgotpassword/:id/:token' element={<ForgotPassword/>}/>
-          <Route path="/errorpage" element={<Errorpage/>} />
+          <Route path='*' element={<Errorpage/>} />
           
        </Routes> 
        
