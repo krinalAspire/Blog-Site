@@ -50,7 +50,7 @@ function Home() {
     fetch(" http://localhost:5000/blogs", {
       method: 'GET'
     }).then(result => result.json())
-      .then(result => BlogDatachange(result))
+      .then((result) =>{ BlogDatachange(result) })
       // }).then((resp)=>{
       //   console.log(resp)
       //   // toast.success('Success'); 

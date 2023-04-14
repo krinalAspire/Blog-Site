@@ -8,7 +8,7 @@ function UserEdit() {
     const navigate = useNavigate();
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.data.userid
+    const adminId=User.userid
 
     const [name, namechange] = useState("");
     const [email, emailchange] = useState("");

@@ -8,7 +8,7 @@ function User(){
     const[userdata, UserDatachange]=useState({});
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.data.userid
+    const adminId=User.userid
 
     useEffect(()=>{
         fetch("http://localhost:5000/users/"+_id,{

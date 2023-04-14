@@ -12,7 +12,7 @@ function Blogcreate() {
     const navigate=useNavigate(); 
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.data.userid
+    const adminId=User.userid
 
     const handlesubmit=(e)=>{
         e.preventDefault();

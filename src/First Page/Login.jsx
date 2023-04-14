@@ -25,6 +25,36 @@ function Login() {
     return result;
   }
 
+  const generateToken=()=>{
+    const refreshtoken=localStorage.getItem("refreshtoken")
+
+    fetch("http://localhost:5000/refresh-token",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(refreshtoken)
+    }).then((res)=>{
+      return res.json();
+    }).then((data)=>{
+      console.log("res", data);
+      const token=data.token
+      localStorage.setItem('token',token)
+
+      if(!token){
+        toast.error("Invalid Login");
+      } else {
+        // usenavigate("/home");
+        if(data.role==="admin"){
+         
+          usenavigate("/home")
+          toast.success("Login Succesfully")  
+        }else{
+          usenavigate("/user")
+          toast.success("Login SuccesFully")
+        }
+      } 
+    })
+  }
+
   const ProceedLogin = (e) => {
     e.preventDefault();
     let regobj={userid,password};
@@ -35,12 +65,23 @@ function Login() {
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(regobj)
       }).then((res)=>{
-        return res.json();
+        const resp= res.json();
+        if(res.status===201){
+          // toast.success("Successfull")
+          return resp
+        } else if(res.status===401){
+          toast.error("token expire")
+          return generateToken();
+        }
       }).then((data)=>{
         // console.log("res",data);
         const token=data.token;
-        const varifiedData={data:data.data,token:token}
-        localStorage.setItem("userData",JSON.stringify(varifiedData))
+        const refreshtoken=data.refreshtoken;
+        // console.log(refreshtoken);
+        const varifiedData={data:data.data,token:token,refreshtoken:refreshtoken}
+        localStorage.setItem("userData",JSON.stringify(data.data))
+        localStorage.setItem("token",JSON.stringify(token))
+        localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
 
         if(!token){
           toast.error("Invalid Login");
@@ -80,6 +121,31 @@ function Login() {
       });
     }
   }
+
+
+//   const ProceedLogin=async(e)=>{
+//     e.preventDefault();
+
+//     const res= await fetch("http://localhost:5000/login",{
+//        method:"POST",
+//        headers:{
+//            "Content-Type":"application/json"
+//        },
+//        body:JSON.stringify({userid,password})
+//     });
+
+//     const data=await res.json();
+//     console.log(data);
+
+//    if(data.status===201){
+//       //  setemail('');
+//       //  setMessage(true);
+//        usenavigate('/')
+//     } else {
+//        toast.error("Invalid User")
+//     }
+// }
+
 
   return (
     <>

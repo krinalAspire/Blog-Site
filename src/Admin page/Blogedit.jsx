@@ -8,7 +8,7 @@ function Blogedit() {
     const [Blogdata, blogdatachange] = useState({});
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.data.userid
+    const adminId=User.userid
 
     useEffect(() => {
         fetch("http://localhost:5000/blogs/" + _id).then((res) => {
