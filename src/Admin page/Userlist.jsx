@@ -58,8 +58,11 @@ function Userlist(){
   }  
      
       useEffect(()=>{
+        let token=JSON.parse(localStorage.getItem("token"))
         fetch("http://localhost:5000/users",{
-          method:'GET'}).then(result=>result.json())
+          method:'GET',
+          headers:{'Authorization': `Bearer ${token}`}
+        }).then(result=>result.json())
           .then(result=>userDatachange(result)) 
         // }).then((resp)=>{
         //   console.log(resp)
