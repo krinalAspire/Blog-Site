@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios  from "axios";
 
 
 function Blogpage() {
@@ -14,19 +15,34 @@ function Blogpage() {
 //   const npage=Math.ceil(blogData.length / recordsperpage);
 //   const numbers=[...Array(npage +1).keys()].slice(1);
 
-    useEffect(() => {
-        fetch(" http://localhost:5000/blogs", {
-            method: 'GET'
-        }).then(result => result.json())
-            .then(result => BlogDatachange(result))
-            // }).then((resp)=>{
-            //   console.log(resp)
-            //   // toast.success('Success'); 
-            // })
-            .catch((err) => {
-                toast.error("Failed : " + err.message);
-            })
-    }, []);
+    // useEffect(() => {
+    //     fetch(" http://localhost:5000/blogs", {
+    //         method: 'GET'
+    //     }).then(result => result.json())
+    //         .then(result => BlogDatachange(result))
+    //         // }).then((resp)=>{
+    //         //   console.log(resp)
+    //         //   // toast.success('Success'); 
+    //         // })
+    //         .catch((err) => {
+    //             toast.error("Failed : " + err.message);
+    //         })
+    // }, []);
+
+    useEffect(()=>{
+    // {
+    //   async function Blog(){
+    //   const res=await axios.get("http://localhost:5000/blogs")
+    //   BlogDatachange(res.data)
+    // } Blog();
+       axios.get("http://localhost:5000/blogs")
+       .then((res)=>{BlogDatachange(res.data)
+        // console.log(res.data)
+        })
+       .catch((err)=>{
+          toast.error("Failed: " + err.message);
+       })
+    },[])
 
     return (
         <>

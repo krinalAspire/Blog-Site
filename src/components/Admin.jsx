@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate, Routes, Route } from "react-router-dom";
 import { toast } from "react-toastify";
 import Blogcreate from "../Admin page/Blogcreate";
+import axios from "axios";
 
 function Home() {
   const [blogData, BlogDatachange] = useState([]);
@@ -25,18 +26,40 @@ function Home() {
     navigate('/home/edit/' + _id)
   }
 
-  const Removefunction = (_id) => {
-    if (window.confirm('are you sure you want to remove ?')) {
-      fetch("http://localhost:5000/blogs/" + _id, {
-        method: 'DELETE'
-      }).then((res) => {
-        toast.success('Removed successfully');
-        window.location.reload();
-      }).catch((err) => {
+  // const Removefunction = (_id) => {
+  //   if (window.confirm('are you sure you want to remove ?')) {
+  //     fetch("http://localhost:5000/blogs/" + _id, {
+  //       method: 'DELETE'
+  //     }).then((res) => {
+  //       toast.success('Removed successfully');
+  //       window.location.reload();
+  //     }).catch((err) => {
+  //       toast.error("Failed:" + err.message);
+  //     })
+  //   }
+  // }
+
+  const Removefunction=async(_id)=>{
+       try{
+        if(window.confirm("are you sure you want to remove ?")){
+          const res=await axios.delete("http://localhost:5000/blogs/"+_id)
+          if(res){
+          toast.success('Removed successfully');
+          // window.location.reload();
+          axios.get("http://localhost:5000/blogs")
+         .then((res)=>{BlogDatachange(res.data)
+         //  console.log(res.data)
+     })
+    .catch((err)=>{
+       toast.error("Failed: " + "can not refresh the data after deleted");
+    })
+        }
+        }
+       }catch(err){
         toast.error("Failed:" + err.message);
-      })
-    }
+       }
   }
+
 
   const usenavigate = useNavigate();
   useEffect(() => {
@@ -46,19 +69,29 @@ function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    fetch(" http://localhost:5000/blogs", {
-      method: 'GET'
-    }).then(result => result.json())
-      .then((result) =>{ BlogDatachange(result) })
-      // }).then((resp)=>{
-      //   console.log(resp)
-      //   // toast.success('Success'); 
-      // })
-      .catch((err) => {
-        toast.error("Failed : " + err.message);
-      })
-  }, []);
+  // useEffect(() => {
+  //   fetch(" http://localhost:5000/blogs", {
+  //     method: 'GET'
+  //   }).then(result => result.json())
+  //     .then((result) =>{ BlogDatachange(result) })
+  //     // }).then((resp)=>{
+  //     //   console.log(resp)
+  //     //   // toast.success('Success'); 
+  //     // })
+  //     .catch((err) => {
+  //       toast.error("Failed : " + err.message);
+  //     })
+  // }, []);
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/blogs")
+    .then((res)=>{BlogDatachange(res.data)
+    //  console.log(res.data)
+     })
+    .catch((err)=>{
+       toast.error("Failed: " + err.message);
+    })
+ },[])
 
   
   return (

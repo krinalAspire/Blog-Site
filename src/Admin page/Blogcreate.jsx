@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,20 +15,36 @@ function Blogcreate() {
     const User=JSON.parse(localStorage.getItem("userData"));
     const adminId=User.userid
 
+    // const handlesubmit=(e)=>{
+    //     e.preventDefault();
+    //     const bdata={title,description,author,category};
+       
+    //     fetch("http://localhost:5000/blogs",{
+    //         method:'POST',
+    //         headers:{"content-type":"application/json"},
+    //         body:JSON.stringify(bdata)
+    //     }).then((res)=>{
+    //         toast.success('Saved successfully');
+    //         navigate('/home');
+    //     }).catch((err)=>{
+    //         toast.error("Failed:" +err.message);
+    //     })
+    // }
+
+
     const handlesubmit=(e)=>{
         e.preventDefault();
         const bdata={title,description,author,category};
-       
-        fetch("http://localhost:5000/blogs",{
-            method:'POST',
-            headers:{"content-type":"application/json"},
-            body:JSON.stringify(bdata)
-        }).then((res)=>{
-            toast.success('Saved successfully');
-            navigate('/home');
+        // console.log(bdata);
+        axios.post("http://localhost:5000/blogs", bdata)
+        .then((response)=>{
+            console.log(response);
+            toast.success("created succesfully")
+            navigate("/home")
         }).catch((err)=>{
             toast.error("Failed:" +err.message);
         })
+
     }
 
     return (

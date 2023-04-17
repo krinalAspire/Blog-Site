@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -23,18 +24,29 @@ function UserDetail(){
         navigate('/home/view/' + _id)
       }
 
+    // useEffect(()=>{
+    //     fetch("http://localhost:5000/blogs",{
+    //       method:'GET'}).then(result=>result.json())
+    //       .then(result=>BlogDatachange(result)) 
+    //     // }).then((resp)=>{
+    //     //   console.log(resp)
+    //     //   // toast.success('Success'); 
+    //     // })
+    //     .catch((err)=>{
+    //       toast.error("Failed : " + err.message);
+    //     })
+    // },[]);
+
     useEffect(()=>{
-        fetch("http://localhost:5000/blogs",{
-          method:'GET'}).then(result=>result.json())
-          .then(result=>BlogDatachange(result)) 
-        // }).then((resp)=>{
-        //   console.log(resp)
-        //   // toast.success('Success'); 
-        // })
-        .catch((err)=>{
-          toast.error("Failed : " + err.message);
-        })
-    },[]);
+      axios.get("http://localhost:5000/blogs")
+      .then((res)=>{BlogDatachange(res.data)
+       })
+      .catch((err)=>{
+         toast.error("Failed: " + err.message);
+      })
+   },[])
+
+
     return(
         <>
         <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: 'rgb(0, 0, 0)' }}>

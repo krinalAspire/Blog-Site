@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,18 +10,28 @@ function Blogview(){
 
     const navigate=useNavigate();
 
+    // useEffect(()=>{
+    //     fetch("http://localhost:5000/blogs/"+_id,{
+    //       method:'GET'}).then(result=>result.json())
+    //       .then(result=>BlogDatachange(result)) 
+    //     // }).then((resp)=>{
+    //     //   console.log(resp)
+    //     //   // toast.success('Success'); 
+    //     // })
+    //     .catch((err)=>{
+    //       toast.error("Failed : " + err.message);
+    //     })
+    // },[]);
+
     useEffect(()=>{
-        fetch("http://localhost:5000/blogs/"+_id,{
-          method:'GET'}).then(result=>result.json())
-          .then(result=>BlogDatachange(result)) 
-        // }).then((resp)=>{
-        //   console.log(resp)
-        //   // toast.success('Success'); 
-        // })
-        .catch((err)=>{
-          toast.error("Failed : " + err.message);
-        })
-    },[]);
+      axios.get("http://localhost:5000/blogs/" + _id)
+      .then((result)=>{
+        // console.log(result.data)
+        BlogDatachange(result.data)})
+      .catch((err)=>{
+        toast.error("Failed: " + err.message);
+      })
+    })
 
     return(
         <>

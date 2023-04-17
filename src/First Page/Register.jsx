@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import {NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import axios from "axios";
 
 function Register() {
     const [userid, idChange] = useState("");
@@ -59,22 +60,38 @@ function Register() {
         return isproceed;
     }
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     let regobj={userid,name,password,email,phone,country,address,gender};
+    //     if(IsValidate()){
+    //     // console.log(regobj);
+    //     fetch("http://localhost:5000/users",{
+    //         method:"POST",
+    //         headers:{'content-type':'application/json'},
+    //         body:JSON.stringify(regobj)
+    //     }).then((res)=>{
+    //         toast.success("Registered success.")
+    //         navigate("/login");
+    //     }).catch((err)=>{
+    //         toast.error("Failed:"+err.message)
+    //     });
+    // }
+    // }
+
+    const handleSubmit=async(e)=>{
         e.preventDefault();
         let regobj={userid,name,password,email,phone,country,address,gender};
+
         if(IsValidate()){
-        // console.log(regobj);
-        fetch("http://localhost:5000/users",{
-            method:"POST",
-            headers:{'content-type':'application/json'},
-            body:JSON.stringify(regobj)
-        }).then((res)=>{
-            toast.success("Registered success.")
-            navigate("/login");
-        }).catch((err)=>{
-            toast.error("Failed:"+err.message)
-        });
-    }
+            try{
+                const res= await axios.post("http://localhost:5000/users", regobj)
+                // console.log(res);
+                toast.success("Registered success.")
+                navigate("/login");
+            }catch(err){
+                toast.error("Failed:"+err.message);
+            }
+        }
     }
 
     return (

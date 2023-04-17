@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,18 +11,28 @@ function User(){
     const User=JSON.parse(localStorage.getItem("userData"));
     const adminId=User.userid
 
+    // useEffect(()=>{
+    //     fetch("http://localhost:5000/users/"+_id,{
+    //       method:'GET'}).then(result=>result.json())
+    //       .then(result=>UserDatachange(result)) 
+    //     // }).then((resp)=>{
+    //     //   console.log(resp)
+    //     //   // toast.success('Success'); 
+    //     // })
+    //     .catch((err)=>{
+    //       toast.error("Failed : " + err.message);
+    //     })
+    // },[]);
+
     useEffect(()=>{
-        fetch("http://localhost:5000/users/"+_id,{
-          method:'GET'}).then(result=>result.json())
-          .then(result=>UserDatachange(result)) 
-        // }).then((resp)=>{
-        //   console.log(resp)
-        //   // toast.success('Success'); 
-        // })
-        .catch((err)=>{
-          toast.error("Failed : " + err.message);
-        })
-    },[]);
+      axios.get("http://localhost:5000/users/" + _id)
+      .then((result)=>{
+        console.log(result.data)
+        UserDatachange(result.data)})
+      .catch((err)=>{
+        toast.error("Failed: " + err.message);
+      })
+    })
 
     return(
         <>

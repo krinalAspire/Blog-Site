@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,19 +11,33 @@ function Blogedit() {
     const User=JSON.parse(localStorage.getItem("userData"));
     const adminId=User.userid
 
-    useEffect(() => {
-        fetch("http://localhost:5000/blogs/" + _id).then((res) => {
-            return res.json();
-        }).then((resp) => {
-            idchange(resp.id);
-            titlechange(resp.title);
-            descriptionchange(resp.description);
-            authorchange(resp.author);
-            categorychange(resp.category);
-        }).catch((err) => {
+    // useEffect(() => {
+    //     fetch("http://localhost:5000/blogs/" + _id).then((res) => {
+    //         return res.json();
+    //     }).then((resp) => {
+    //         idchange(resp.id);
+    //         titlechange(resp.title);
+    //         descriptionchange(resp.description);
+    //         authorchange(resp.author);
+    //         categorychange(resp.category);
+    //     }).catch((err) => {
+    //         toast.error("Failed :" + err.message);
+    //     })
+    // }, []);
+
+    useEffect(()=>{
+        axios.get("http://localhost:5000/blogs/"+_id)
+        .then((res)=>{
+            // console.log(res);
+            idchange(res.data.id);
+            titlechange(res.data.title);
+            descriptionchange(res.data.description);
+            authorchange(res.data.author);
+            categorychange(res.data.category);
+        }).catch((err)=>{
             toast.error("Failed :" + err.message);
         })
-    }, []);
+    },[]);
 
     const [id, idchange] = useState("");
     const [title, titlechange] = useState("");
@@ -32,20 +47,33 @@ function Blogedit() {
 
     const navigate = useNavigate();
 
-    const handlesubmit = (e) => {
+    // const handlesubmit = (e) => {
+    //     e.preventDefault();
+    //     const bdata = { id, title, description, author, category };
+
+    //     fetch("http://localhost:5000/blogs/"+_id, {
+    //         method: 'PATCH',
+    //         headers: { "content-type": "application/json" },
+    //         body: JSON.stringify(bdata)
+    //     }).then((res) => {
+    //         toast.success('Saved successfully');
+    //         navigate('/home');
+    //     }).catch((err) => {
+    //         toast.error("Failed:" + err.message);
+    //     })
+    // }
+
+    const handlesubmit=async(e)=>{
         e.preventDefault();
         const bdata = { id, title, description, author, category };
-
-        fetch("http://localhost:5000/blogs/"+_id, {
-            method: 'PATCH',
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(bdata)
-        }).then((res) => {
+        try{
+            const res=await axios.patch("http://localhost:5000/blogs/"+_id, bdata)
+            console.log(res);
             toast.success('Saved successfully');
             navigate('/home');
-        }).catch((err) => {
-            toast.error("Failed:" + err.message);
-        })
+        }catch(err){
+            toast.error("Failed:" +err.message);
+        }
     }
 
     return (

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -34,44 +35,53 @@ function Userlist(){
       }
 
     
-  const Removefunction = (_id) => {
-    if (window.confirm('are you sure you want to remove ?')) {
-      fetch("http://localhost:5000/users/" + _id, {
-        method: 'DELETE'
-      }).then((res) => {
-        toast.success('Removed successfully');
-        // window.location.reload();\
-        fetch("http://localhost:5000/users",{
-          method:'GET'}).then(result=>result.json())
-          .then(result=>userDatachange(result)) 
-        // }).then((resp)=>{
-        //   console.log(resp)
-        //   // toast.success('Success'); 
-        // })
-        .catch((err)=>{
-          toast.error("Failed : " + err.message);
-        })
-      }).catch((err) => {
-        toast.error("Failed:" + err.message);
+  
+      const Removefunction=async(_id)=>{
+        try{
+         if(window.confirm("are you sure you want to remove ?")){
+           const res=await axios.delete("http://localhost:5000/users/"+_id)
+           if(res){
+           toast.success('Removed successfully');
+           // window.location.reload();
+           axios.get("http://localhost:5000/users")
+          .then((res)=>{userDatachange(res.data)
+          //  console.log(res.data)
       })
-    }
-  }  
+     .catch((err)=>{
+        toast.error("Failed: " + "can not refresh data after delete");
+     })
+         }
+         }
+        }catch(err){
+         toast.error("Failed:" + err.message);
+        }
+   } 
      
-      useEffect(()=>{
-        let token=JSON.parse(localStorage.getItem("token"))
-        fetch("http://localhost:5000/users",{
-          method:'GET',
-          headers:{'Authorization': `Bearer ${token}`}
-        }).then(result=>result.json())
-          .then(result=>userDatachange(result)) 
-        // }).then((resp)=>{
-        //   console.log(resp)
-        //   // toast.success('Success'); 
-        // })
-        .catch((err)=>{
-          toast.error("Failed : " + err.message);
-        })
-    },[]);
+    //   useEffect(()=>{
+    //     // let token=JSON.parse(localStorage.getItem("token"))
+    //     fetch("http://localhost:5000/users",{
+    //       method:'GET',
+    //       // headers:{'Authorization': `Bearer ${token}`}
+    //     }).then(result=>result.json())
+    //       .then(result=>userDatachange(result)) 
+    //     // }).then((resp)=>{
+    //     //   console.log(resp)
+    //     //   // toast.success('Success'); 
+    //     // })
+    //     .catch((err)=>{
+    //       toast.error("Failed : " + err.message);
+    //     })
+    // },[]);
+
+    useEffect(()=>{
+      axios.get("http://localhost:5000/users")
+      .then((res)=>{userDatachange(res.data)
+       console.log(res.data)
+       })
+      .catch((err)=>{
+         toast.error("Failed: " + err.message);
+      })
+   },[])
 
     return(
         <>

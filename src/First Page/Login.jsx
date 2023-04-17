@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {NavLink ,Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -65,14 +66,15 @@ function Login() {
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(regobj)
       }).then((res)=>{
-        const resp= res.json();
-        if(res.status===201){
-          // toast.success("Successfull")
-          return resp
-        } else if(res.status===401){
-          toast.error("token expire")
-          return generateToken();
-        }
+        // const resp= res.json();
+        // if(res.status===201){
+        //   // toast.success("Successfull")
+        //   return resp
+        // } else if(res.status===401){
+        //   toast.error("token expire")
+        //   return generateToken();
+        // }
+        return res.json()
       }).then((data)=>{
         // console.log("res",data);
         const token=data.token;
@@ -145,6 +147,46 @@ function Login() {
 //        toast.error("Invalid User")
 //     }
 // }
+
+
+  // const ProceedLogin=async(e)=>{
+  //   e.preventDefault();
+  //   let regobj={userid,password};
+  //   // console.log(regobj);
+  //     try{
+  //       if(validate()){
+  //         const res=await axios.post("http://localhost:5000/login", regobj)
+  //         // console.log(res);
+  //         const token=res.data.token;
+  //         // console.log(token);
+  //         const refreshtoken=res.data.refreshtoken;
+
+  //         const varifiedData={data:res.data,token:token,refreshtoken:refreshtoken}
+  //         console.log(varifiedData);
+  //         localStorage.setItem("userData",JSON.stringify(res.data))
+  //         localStorage.setItem("token",JSON.stringify(token))
+  //         localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
+
+  //         if(!token){
+  //           toast.error("Invalid Login");
+  //         } else {
+  //           // usenavigate("/home");
+  //           console.log(varifiedData.data.role);
+  //           if(varifiedData.data.role==="admin"){
+             
+  //             usenavigate("/home")
+  //             toast.success("Login Succesfully")  
+  //           }else{
+  //             usenavigate("/user")
+  //             toast.success("Login SuccesFully")
+  //           }
+  //         } 
+  //       }
+
+  //     }catch(err){
+  //       toast.error('Login Failed due to'+err.message);
+  //     }
+  // }
 
 
   return (

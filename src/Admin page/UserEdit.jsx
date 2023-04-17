@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,37 +18,64 @@ function UserEdit() {
     const [address, addresschange] = useState("");
     const [role, rolechange]=useState("admin");
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users/" + _id).then((res) => {
-        return res.json();
-    }).then((resp) => {
-        namechange(resp.name);
-        emailchange(resp.email);
-        phonechange(resp.phone);
-        countrychange(resp.country);
-        addresschange(resp.address);
-        rolechange(resp.role);
-    }).catch((err) => {
-        toast.error("Failed :" + err.message);
-    })
-}, []);
+//   useEffect(() => {
+//     fetch("http://localhost:5000/users/" + _id).then((res) => {
+//         return res.json();
+//     }).then((resp) => {
+//         namechange(resp.name);
+//         emailchange(resp.email);
+//         phonechange(resp.phone);
+//         countrychange(resp.country);
+//         addresschange(resp.address);
+//         rolechange(resp.role);
+//     }).catch((err) => {
+//         toast.error("Failed :" + err.message);
+//     })
+// }, []);
 
-const handlesubmit = (e) => {
+useEffect(()=>{
+  axios.get("http://localhost:5000/users/"+_id)
+  .then((res)=>{
+     namechange(res.data.name);
+     emailchange(res.data.email);
+     phonechange(res.data.phone);
+     countrychange(res.data.country);
+     addresschange(res.data.address);
+     rolechange(res.data.role);
+  })
+  .catch((err)=>{
+    toast.error("Failed :" + err.message);
+  })
+},[]);
+
+// const handlesubmit = (e) => {
+//   e.preventDefault();
+//   const bdata = { name, email, phone, country, address , role };
+
+//   fetch("http://localhost:5000/users/"+_id, {
+//       method: 'PATCH',
+//       headers: { "content-type": "application/json" },
+//       body: JSON.stringify(bdata)
+//   }).then((res) => {
+//       toast.success('Saved successfully');
+//       navigate('/userlist');
+//   }).catch((err) => {
+//       toast.error("Failed:" + err.message);
+//   })
+// }
+
+const handlesubmit=async(e)=>{
   e.preventDefault();
   const bdata = { name, email, phone, country, address , role };
-
-  fetch("http://localhost:5000/users/"+_id, {
-      method: 'PATCH',
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(bdata)
-  }).then((res) => {
-      toast.success('Saved successfully');
-      navigate('/userlist');
-  }).catch((err) => {
-      toast.error("Failed:" + err.message);
-  })
+  try{
+    const res=await axios.patch("http://localhost:5000/users/"+_id, bdata)
+    console.log(res);
+    toast.success('Saved successfully');
+    navigate('/userlist');
+  }catch(err){
+    toast.error("Failed:" + err.message);
+  }
 }
-
 
   return (
     <>
