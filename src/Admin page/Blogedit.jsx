@@ -9,7 +9,7 @@ function Blogedit() {
     const [Blogdata, blogdatachange] = useState({});
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.userid
+    const adminId=User.data.userid
 
     // useEffect(() => {
     //     fetch("http://localhost:5000/blogs/" + _id).then((res) => {
@@ -63,12 +63,18 @@ function Blogedit() {
     //     })
     // }
 
+    const data=JSON.parse(localStorage.getItem("token"));
+    const token=data.token  
+    console.log(token);  
+
     const handlesubmit=async(e)=>{
         e.preventDefault();
         const bdata = { id, title, description, author, category };
         try{
             const res=await axios.patch("http://localhost:5000/blogs/"+_id, bdata)
+            axios.defaults.headers.common["Authorization"]=`Bearer ${token}`;
             console.log(res);
+            if(res.status===201)
             toast.success('Saved successfully');
             navigate('/home');
         }catch(err){

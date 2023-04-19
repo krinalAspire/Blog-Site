@@ -56,73 +56,73 @@ function Login() {
     })
   }
 
-  const ProceedLogin = (e) => {
-    e.preventDefault();
-    let regobj={userid,password};
-    if(validate()){
-      //  console.log("proceed");
-      fetch("http://localhost:5000/login",{
-            method:"POST",
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(regobj)
-      }).then((res)=>{
-        // const resp= res.json();
-        // if(res.status===201){
-        //   // toast.success("Successfull")
-        //   return resp
-        // } else if(res.status===401){
-        //   toast.error("token expire")
-        //   return generateToken();
-        // }
-        return res.json()
-      }).then((data)=>{
-        // console.log("res",data);
-        const token=data.token;
-        const refreshtoken=data.refreshtoken;
-        // console.log(refreshtoken);
-        const varifiedData={data:data.data,token:token,refreshtoken:refreshtoken}
-        localStorage.setItem("userData",JSON.stringify(data.data))
-        localStorage.setItem("token",JSON.stringify(token))
-        localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
+  // const ProceedLogin = (e) => {
+  //   e.preventDefault();
+  //   let regobj={userid,password};
+  //   if(validate()){
+  //     //  console.log("proceed");
+  //     fetch("http://localhost:5000/login",{
+  //           method:"POST",
+  //           headers:{'Content-Type':'application/json'},
+  //           body:JSON.stringify(regobj)
+  //     }).then((res)=>{
+  //       // const resp= res.json();
+  //       // if(res.status===201){
+  //       //   // toast.success("Successfull")
+  //       //   return resp
+  //       // } else if(res.status===401){
+  //       //   toast.error("token expire")
+  //       //   return generateToken();
+  //       // }
+  //       return res.json()
+  //     }).then((data)=>{
+  //       // console.log("res",data);
+  //       const token=data.token;
+  //       const refreshtoken=data.refreshtoken;
+  //       // console.log(refreshtoken);
+  //       const varifiedData={data:data.data,token:token,refreshtoken:refreshtoken}
+  //       localStorage.setItem("userData",JSON.stringify(data.data))
+  //       localStorage.setItem("token",JSON.stringify(token))
+  //       localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
 
-        if(!token){
-          toast.error("Invalid Login");
-        } else {
-          // usenavigate("/home");
-          if(varifiedData.data.role==="admin"){
+  //       if(!token){
+  //         toast.error("Invalid Login");
+  //       } else {
+  //         // usenavigate("/home");
+  //         if(varifiedData.data.role==="admin"){
            
-            usenavigate("/home")
-            toast.success("Login Succesfully")  
-          }else{
-            usenavigate("/user")
-            toast.success("Login SuccesFully")
-          }
-        } 
-      })
-      // .then((resp)=>{
-      //    //console.log(resp)
-      //    if(Object.keys(resp).length===0){
-      //     toast.error('Please Enter valid username');
-      //    } else{
-      //      if(resp.password===password){
-      //         toast.success('Success');
-      //         localStorage.setItem ('userid',userid);
-      //         usenavigate('/home')
-      //      } else{
-      //        toast.error('please Enter valid password');
-      //      }
-      //      if(resp.role==='admin'){
-      //         usenavigate('/home')
-      //      }else{
-      //         usenavigate('/user')
-      //      }
-      //    }
-      // })
-      .catch((err)=>{
-       toast.error('Login Failed due to'+err.message);
-      });
-    }
-  }
+  //           usenavigate("/home")
+  //           toast.success("Login Succesfully")  
+  //         }else{
+  //           usenavigate("/user")
+  //           toast.success("Login SuccesFully")
+  //         }
+  //       } 
+  //     })
+  //     // .then((resp)=>{
+  //     //    //console.log(resp)
+  //     //    if(Object.keys(resp).length===0){
+  //     //     toast.error('Please Enter valid username');
+  //     //    } else{
+  //     //      if(resp.password===password){
+  //     //         toast.success('Success');
+  //     //         localStorage.setItem ('userid',userid);
+  //     //         usenavigate('/home')
+  //     //      } else{
+  //     //        toast.error('please Enter valid password');
+  //     //      }
+  //     //      if(resp.role==='admin'){
+  //     //         usenavigate('/home')
+  //     //      }else{
+  //     //         usenavigate('/user')
+  //     //      }
+  //     //    }
+  //     // })
+  //     .catch((err)=>{
+  //      toast.error('Login Failed due to'+err.message);
+  //     });
+  //   }
+  // }
 
 
 //   const ProceedLogin=async(e)=>{
@@ -149,44 +149,46 @@ function Login() {
 // }
 
 
-  // const ProceedLogin=async(e)=>{
-  //   e.preventDefault();
-  //   let regobj={userid,password};
-  //   // console.log(regobj);
-  //     try{
-  //       if(validate()){
-  //         const res=await axios.post("http://localhost:5000/login", regobj)
-  //         // console.log(res);
-  //         const token=res.data.token;
-  //         // console.log(token);
-  //         const refreshtoken=res.data.refreshtoken;
+  const ProceedLogin=async(e)=>{
+    e.preventDefault();
+    let regobj={userid,password};
+    // console.log(regobj);
+      try{
+        if(validate()){
+          const res=await axios.post("http://localhost:5000/login", regobj)
+          // console.log(res);
+          const token=res.data.token;
+          // console.log(token);
+          const refreshtoken=res.data.refreshtoken;
 
-  //         const varifiedData={data:res.data,token:token,refreshtoken:refreshtoken}
-  //         console.log(varifiedData);
-  //         localStorage.setItem("userData",JSON.stringify(res.data))
-  //         localStorage.setItem("token",JSON.stringify(token))
-  //         localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
+          const varifiedData={data:res.data,token:token,refreshtoken:refreshtoken}
+          // console.log(varifiedData);
+          localStorage.setItem("userData",JSON.stringify(res.data))
+          localStorage.setItem("token",JSON.stringify(token))
+          localStorage.setItem("refreshtoken",JSON.stringify(refreshtoken))
 
-  //         if(!token){
-  //           toast.error("Invalid Login");
-  //         } else {
-  //           // usenavigate("/home");
-  //           console.log(varifiedData.data.role);
-  //           if(varifiedData.data.role==="admin"){
+          // console.log(res.data.data);
+
+          if(!token){
+            toast.error("Invalid Login");
+          } else {
+            // usenavigate("/home");
+            // console.log("role",varifiedData.data.data.role);
+            if(varifiedData.data.data.role==="admin"){
              
-  //             usenavigate("/home")
-  //             toast.success("Login Succesfully")  
-  //           }else{
-  //             usenavigate("/user")
-  //             toast.success("Login SuccesFully")
-  //           }
-  //         } 
-  //       }
+              usenavigate("/home")
+              toast.success("Login Succesfully")  
+            }else{
+              usenavigate("/user")
+              toast.success("Login SuccesFully")
+            }
+          } 
+        }
 
-  //     }catch(err){
-  //       toast.error('Login Failed due to'+err.message);
-  //     }
-  // }
+      }catch(err){
+        toast.error('Login Failed due to'+err.message);
+      }
+  }
 
 
   return (

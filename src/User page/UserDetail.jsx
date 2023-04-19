@@ -10,7 +10,7 @@ function UserDetail(){
     const navigate = useNavigate();
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const userId=User.userid
+    const userId=User.data.userid
 
     const[currentpage,setcurrentpage]=useState(1);
     const recordsperpage=3;

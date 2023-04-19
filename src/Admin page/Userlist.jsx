@@ -9,7 +9,9 @@ function Userlist(){
     const navigate = useNavigate();
 
     const User=JSON.parse(localStorage.getItem("userData"));
-    const adminId=User.userid
+    // console.log(User);
+    const adminId=User.data.userid
+    // console.log(adminId);
 
     // useEffect(() => {
     //   let userData = localStorage.getItem('userData');
