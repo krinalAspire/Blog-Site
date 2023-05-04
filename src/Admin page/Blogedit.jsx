@@ -74,7 +74,6 @@ function Blogedit() {
             const res=await axios.patch("http://localhost:5000/blogs/"+_id, bdata)
             axios.defaults.headers.common["Authorization"]=`Bearer ${token}`;
             console.log(res);
-            if(res.status===201)
             toast.success('Saved successfully');
             navigate('/home');
         }catch(err){

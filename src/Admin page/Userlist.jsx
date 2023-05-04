@@ -13,6 +13,11 @@ function Userlist(){
     const adminId=User.data.userid
     // console.log(adminId);
 
+    const token=JSON.parse(localStorage.getItem("token"));
+    const getLocalRefreshToken=JSON.parse(localStorage.getItem("refreshtoken"))
+    // console.log(getLocalRefreshToken);
+
+
     // useEffect(() => {
     //   let userData = localStorage.getItem('userData');
     //   if (userData === '' || userData === null) {
@@ -36,6 +41,21 @@ function Userlist(){
         navigate('/user/view/' + _id)
       }
 
+
+      const refreshToken=async()=>{
+        try {
+          const res= await axios.post("http://localhost:5000/refresh-token", {
+            refreshtoken: getLocalRefreshToken},
+             {headers:{"Authorization" : `Bearer ${token}`}}
+            );
+          const token=res.data.token;
+          // console.log("new token",token);
+          // localStorage.setItem("token",token);
+          // getUser();
+        } catch (error) {
+          toast.error(error?.response?.data?.msg);
+        }
+      }
     
   
       const Removefunction=async(_id)=>{
@@ -75,14 +95,51 @@ function Userlist(){
     //     })
     // },[]);
 
+    // const getUser=async()=>{
+    //    try{
+    //     const res=await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+    //     // console.log(res);
+    //    }catch(err){
+    //     toast.error("Failed: " + err.message);
+    //    }
+    // }
+
+    // const getUser=()=>{
+    //   axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+    //   .then((res)=>{userDatachange(res.data)
+    //   //  console.log(res.data)
+    //    })
+    //   .catch((err)=>{
+    //      refreshToken(); 
+    //      toast.error("Failed: " + err.message);
+    //   })
+    // }
+
+    // useEffect(()=>{
+    //   const getUser=async()=>{
+    //     try{
+    //       const res= await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+    //       if(!token){
+    //         refreshToken(); 
+    //         toast.error("Token Expired!!");
+    //       }
+    //     }catch(err){
+    //         toast.error("Failed: " + err.message);
+    //     }
+    //   }
+    // })
+
+
     useEffect(()=>{
-      axios.get("http://localhost:5000/users")
+      axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
       .then((res)=>{userDatachange(res.data)
-       console.log(res.data)
+      //  console.log(res.data)
        })
       .catch((err)=>{
+         refreshToken(); 
          toast.error("Failed: " + err.message);
       })
+      // getUser();
    },[])
 
     return(

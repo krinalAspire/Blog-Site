@@ -10,6 +10,9 @@ function UserEdit() {
 
     const User=JSON.parse(localStorage.getItem("userData"));
     const adminId=User.data.userid
+    
+    // const token=JSON.parse(localStorage.getItem("token"));
+    // console.log(token);
 
     const [name, namechange] = useState("");
     const [email, emailchange] = useState("");
@@ -65,11 +68,15 @@ useEffect(()=>{
 // }
 
 const handlesubmit=async(e)=>{
+  const token=JSON.parse(localStorage.getItem("token"));
+  // console.log(token);
   e.preventDefault();
   const bdata = { name, email, phone, country, address , role };
   try{
-    const res=await axios.patch("http://localhost:5000/users/"+_id, bdata)
-    console.log(res);
+    const res=await axios.patch("http://localhost:5000/users/"+_id, bdata,
+    // {headers: {"Authorization" : `Bearer ${token}`}}
+    )
+    // console.log(res);
     toast.success('Saved successfully');
     navigate('/userlist');
   }catch(err){
