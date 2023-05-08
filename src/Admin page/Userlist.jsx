@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -95,51 +96,30 @@ function Userlist(){
     //     })
     // },[]);
 
-    // const getUser=async()=>{
-    //    try{
-    //     const res=await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-    //     // console.log(res);
-    //    }catch(err){
-    //     toast.error("Failed: " + err.message);
-    //    }
-    // }
-
-    // const getUser=()=>{
-    //   axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-    //   .then((res)=>{userDatachange(res.data)
-    //   //  console.log(res.data)
-    //    })
-    //   .catch((err)=>{
-    //      refreshToken(); 
-    //      toast.error("Failed: " + err.message);
-    //   })
-    // }
-
-    // useEffect(()=>{
-    //   const getUser=async()=>{
-    //     try{
-    //       const res= await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-    //       if(!token){
-    //         refreshToken(); 
-    //         toast.error("Token Expired!!");
-    //       }
-    //     }catch(err){
-    //         toast.error("Failed: " + err.message);
-    //     }
-    //   }
-    // })
+    const getUser=async()=>{
+       try{
+        const res=await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+        // console.log(res);
+        userDatachange(res.data)
+        if(res.status===419){
+          refreshToken();
+        }
+       }catch(err){
+        toast.error("Failed: " + err.message);
+       }
+    }
 
 
     useEffect(()=>{
-      axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-      .then((res)=>{userDatachange(res.data)
-      //  console.log(res.data)
-       })
-      .catch((err)=>{
-         refreshToken(); 
-         toast.error("Failed: " + err.message);
-      })
-      // getUser();
+      // axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+      // .then((res)=>{userDatachange(res.data)
+      // //  console.log(res.data)
+      //  })
+      // .catch((err)=>{
+      //    refreshToken(); 
+      //    toast.error("Failed: " + err.message);
+      // })
+      getUser();
    },[])
 
     return(
