@@ -1,16 +1,9 @@
 import axios from "axios";
+import { getLocalAccessToken } from "./getToken";
+import { getRefreshToken } from "./getToken";
+
 
 export const axiosInstance = axios.create();
-
-const getLocalAccessToken=()=>{
-    const token = JSON.parse(localStorage.getItem("token"))
-    return token;
-}
-
-const getRefreshToken=()=>{
-    const refreshToken = JSON.parse(localStorage.getItem("refreshToken"))
-    return refreshToken;
-}
 
 axiosInstance.interceptors.request.use(
     (config) => {

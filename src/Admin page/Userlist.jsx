@@ -1,5 +1,7 @@
 import axios from "axios";
-
+// import { getRefreshToken } from "../Services/axiosservices/getToken";
+import { getLocalAccessToken } from "../Services/axiosservices/getToken";
+import { axiosInstance } from "../Services/axiosservices/axiosIntercepter";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,8 +16,8 @@ function Userlist(){
     const adminId=User.data.userid
     // console.log(adminId);
 
-    const token=JSON.parse(localStorage.getItem("token"));
-    const getLocalRefreshToken=JSON.parse(localStorage.getItem("refreshtoken"))
+    const token=getLocalAccessToken();
+    // const getLocalRefreshToken=JSON.parse(localStorage.getItem("refreshtoken"))
     // console.log(getLocalRefreshToken);
 
 
@@ -43,20 +45,20 @@ function Userlist(){
       }
 
 
-      const refreshToken=async()=>{
-        try {
-          const res= await axios.post("http://localhost:5000/refresh-token", {
-            refreshtoken: getLocalRefreshToken},
-             {headers:{"Authorization" : `Bearer ${token}`}}
-            );
-          const token=res.data.token;
-          // console.log("new token",token);
-          // localStorage.setItem("token",token);
-          // getUser();
-        } catch (error) {
-          toast.error(error?.response?.data?.msg);
-        }
-      }
+      // const refreshToken=async()=>{
+      //   try {
+      //     const res= await axios.post("http://localhost:5000/refresh-token", {
+      //       refreshtoken: getLocalRefreshToken},
+      //        {headers:{"Authorization" : `Bearer ${token}`}}
+      //       );
+      //     const token=res.data.token;
+      //     // console.log("new token",token);
+      //     // localStorage.setItem("token",token);
+      //     // getUser();
+      //   } catch (error) {
+      //     toast.error(error?.response?.data?.msg);
+      //   }
+      // }
     
   
       const Removefunction=async(_id)=>{
@@ -96,17 +98,26 @@ function Userlist(){
     //     })
     // },[]);
 
+    // const getUser=async()=>{
+    //    try{
+    //     const res=await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+    //     // console.log(res);
+    //     userDatachange(res.data)
+    //     if(res.status===419){
+    //       refreshToken();
+    //     }
+    //    }catch(err){
+    //     toast.error("Failed: " + err.message);
+    //    }
+    // }
+
     const getUser=async()=>{
-       try{
-        const res=await axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-        // console.log(res);
-        userDatachange(res.data)
-        if(res.status===419){
-          refreshToken();
-        }
-       }catch(err){
+      try{
+         const res= await axiosInstance.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
+         userDatachange(res.data);
+      }catch(err){
         toast.error("Failed: " + err.message);
-       }
+      }
     }
 
 
