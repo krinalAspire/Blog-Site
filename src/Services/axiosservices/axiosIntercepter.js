@@ -46,14 +46,6 @@ axiosInstance.interceptors.response.use(
                 }
             }
 
-            // if (err.response.status === 420 && !originalConfig._retry) {
-            //     localStorage.removeItem("refreshToken");
-            //     localStorage.removeItem("userData");
-            //     localStorage.removeItem("token");
-            //     // eslint-disable-next-line no-restricted-globals
-            //     location.href = '/signin'
-            // }
-
             if (err.response.status === 400 && err.response.data) {
                 return Promise.reject(err.response.data);
             }

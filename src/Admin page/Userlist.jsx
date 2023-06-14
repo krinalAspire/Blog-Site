@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { getRefreshToken } from "../Services/axiosservices/getToken";
 import { getLocalAccessToken } from "../Services/axiosservices/getToken";
 import { axiosInstance } from "../Services/axiosservices/axiosIntercepter";
 import React, { useEffect, useState } from "react";
@@ -17,16 +16,6 @@ function Userlist(){
     // console.log(adminId);
 
     const token=getLocalAccessToken();
-    // const getLocalRefreshToken=JSON.parse(localStorage.getItem("refreshtoken"))
-    // console.log(getLocalRefreshToken);
-
-
-    // useEffect(() => {
-    //   let userData = localStorage.getItem('userData');
-    //   if (userData === '' || userData === null) {
-    //     navigate('/login');
-    //   }
-    // }, []);
 
   const[currentpage,setcurrentpage]=useState(1);
   const recordsperpage=8;
@@ -122,14 +111,6 @@ function Userlist(){
 
 
     useEffect(()=>{
-      // axios.get("http://localhost:5000/users",{ headers: {"Authorization" : `Bearer ${token}`} })
-      // .then((res)=>{userDatachange(res.data)
-      // //  console.log(res.data)
-      //  })
-      // .catch((err)=>{
-      //    refreshToken(); 
-      //    toast.error("Failed: " + err.message);
-      // })
       getUser();
    },[])
 

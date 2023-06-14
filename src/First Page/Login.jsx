@@ -216,6 +216,8 @@ function Login() {
                     <NavLink to="/register" className="navbar-brand ms-3 nav-link text-white btn btn-outline-info p-1" ><span className="fa fa-user-plus me-2"></span>Register</NavLink>
                 </div>
             </nav>
+
+            
       <div>
         <section className="container">
           <br></br>
